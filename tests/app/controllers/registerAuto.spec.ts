@@ -32,6 +32,16 @@ describe("registerAuto Controller", () => {
       HTTPBadRequest(new ParamIsMissing("marca")).msg
     );
   });
+  test("should return 400 if placa is not provided", () => {
+    const request = {
+      placa: "any_placa",
+      marca: "any_marca",
+    };
+    const response = sut.handle(request);
+
+    expect(response.statusCode).toBe(400);
+    expect(response.msg).toEqual(HTTPBadRequest(new ParamIsMissing("cor")).msg);
+  });
 
   test("should return 200 if auto created successfully", () => {
     const request = {

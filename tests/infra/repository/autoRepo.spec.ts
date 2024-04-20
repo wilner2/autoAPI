@@ -88,5 +88,14 @@ describe('Create Auto repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
+    test('should return auto saved', async () => {
+        request.placa = "any_placa3"
+
+        const response = await sut.create(request)
+
+
+        expect(response).toEqual({ ...request, created_at: new Date().toISOString(), status: true, id: 3 })
+    });
+
 
 });

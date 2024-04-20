@@ -1,5 +1,5 @@
-import { CreateAuto } from "@/contracts/createAuto";
-import { RegisterAuto } from "@/contracts/registerAuto";
+import { CreateAuto } from "@/contracts/repos/createAuto";
+import { RegisterAuto } from "@/contracts/useCases/registerAuto";
 import { RegisterAutoCase } from "@/domain/useCases/registerAuto";
 import { MockProxy, mock } from "jest-mock-extended";
 

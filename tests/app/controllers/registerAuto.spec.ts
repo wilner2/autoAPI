@@ -71,6 +71,6 @@ describe("registerAuto Controller", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(200);
-    expect(response.msg).toEqual("Automóvel created successfully");
+    expect(response.msg).toEqual("created successfully");
   });
 });

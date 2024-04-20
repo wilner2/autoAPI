@@ -1,4 +1,4 @@
-import { RegisterAuto } from "@/contracts/registerAuto";
+import { RegisterAuto } from "@/contracts/useCases/registerAuto";
 import { ParamIsMissing } from "@/app/helpers/excepetions";
 import {
   HTTPBadRequest,
@@ -7,7 +7,7 @@ import {
 } from "@/app/helpers/http";
 
 export class RegisterAutoController {
-  constructor(private registerAuto: RegisterAuto) {}
+  constructor(private registerAuto: RegisterAuto) { }
   async handle(request: any) {
     try {
       const requiredParams = ["placa", "cor", "marca"];

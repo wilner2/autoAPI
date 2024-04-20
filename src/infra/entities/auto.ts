@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm"
 @Entity('automovel')
 export class Auto {
     @PrimaryGeneratedColumn()
-    id!: string
+    id!: Date
 
     @Column()
     cor!: string
@@ -14,8 +14,8 @@ export class Auto {
     @Column({ unique: true })
     placa!: string
 
-    @Column()
-    createdAt!: Date
+    @Column({ type: 'timestamptz' })
+    created_at!: Date
 
     @Column()
     status!: boolean

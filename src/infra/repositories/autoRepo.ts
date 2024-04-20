@@ -6,7 +6,8 @@ import { PgRepository } from "./repository";
 export class AutoRepository extends PgRepository implements CreateAuto {
 
     async create({ cor, marca, placa }: CreateAuto.Input) {
-        this.getRepository(Auto)
+        const repository = this.getRepository(Auto)
+        return await repository.save({ cor, marca, placa, created_at: new Date().toISOString(), status: true })
 
     }
 

@@ -1,6 +1,6 @@
 import { RegisterAutoController } from "@/app/controllers/registerAuto";
 import { RegisterAuto } from "@/contracts/useCases/registerAuto";
-import { ParamIsMissing } from "@/app/helpers/excepetions";
+import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
 import { MockProxy, mock } from "jest-mock-extended";
 
@@ -22,7 +22,7 @@ describe("registerAuto Controller", () => {
 
     expect(response.statusCode).toBe(400);
     expect(response.msg).toEqual(
-      HTTPBadRequest(new ParamIsMissing("placa")).msg
+      HTTPBadRequest(new ParamsError("\"placa\" is required")).msg
     );
   });
   test("should return 400 if placa is not provided", async () => {
@@ -34,7 +34,7 @@ describe("registerAuto Controller", () => {
 
     expect(response.statusCode).toBe(400);
     expect(response.msg).toEqual(
-      HTTPBadRequest(new ParamIsMissing("marca")).msg
+      HTTPBadRequest(new ParamsError("\"marca\" is required")).msg
     );
   });
   test("should return 400 if placa is not provided", async () => {
@@ -45,7 +45,7 @@ describe("registerAuto Controller", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(400);
-    expect(response.msg).toEqual(HTTPBadRequest(new ParamIsMissing("cor")).msg);
+    expect(response.msg).toEqual(HTTPBadRequest(new ParamsError("\"cor\" is required")).msg);
   });
 
   test("should return 500 if an internal error occurs", async () => {

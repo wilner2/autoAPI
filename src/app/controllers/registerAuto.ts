@@ -14,7 +14,7 @@ export class RegisterAutoController {
         }
       }
       await this.registerAuto.execute(request);
-      return Ok("Automóvel created successfully");
+      return Ok("created successfully");
     } catch (error) {
       return HTTPInternalServerError(error);
     }

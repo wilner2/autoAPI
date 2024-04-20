@@ -1,7 +1,7 @@
 import { RegisterAutoController } from "@/app/controllers/registerAuto";
 import { RegisterAuto } from "@/contracts/registerAuto";
-import { ParamIsMissing } from "@/helpers/excepetions";
-import { HTTPBadRequest } from "@/helpers/http";
+import { ParamIsMissing } from "@/app/helpers/excepetions";
+import { HTTPBadRequest } from "@/app/helpers/http";
 import { MockProxy, mock } from "jest-mock-extended";
 
 describe("registerAuto Controller", () => {

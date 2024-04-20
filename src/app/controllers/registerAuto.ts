@@ -1,6 +1,10 @@
 import { RegisterAuto } from "@/contracts/registerAuto";
-import { ParamIsMissing } from "@/helpers/excepetions";
-import { HTTPBadRequest, HTTPInternalServerError, Ok } from "@/helpers/http";
+import { ParamIsMissing } from "@/app/helpers/excepetions";
+import {
+  HTTPBadRequest,
+  HTTPInternalServerError,
+  Ok,
+} from "@/app/helpers/http";
 
 export class RegisterAutoController {
   constructor(private registerAuto: RegisterAuto) {}

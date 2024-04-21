@@ -1,4 +1,4 @@
-import { CreateVehicle } from "@/contracts/repos/createVehicle";
+import { CreateVehicle } from "@/contracts/repos/vehicle";
 import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
 import { Vehicle } from "@/domain/entities/vehicle";
 

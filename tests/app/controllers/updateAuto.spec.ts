@@ -1,12 +1,16 @@
-import { UpdateAuto } from "@/app/controllers/updateAuto";
+import { UpdateAutoController } from "@/app/controllers/updateAuto";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
+import { UpdateAutoContract } from "@/contracts/useCases/updateAuto";
+import { MockProxy, mock } from "jest-mock-extended";
 
 describe('UpdateAuto Controller', () => {
 
-    let sut: UpdateAuto
+    let sut: UpdateAutoController
+    let stubUpdatingAuto: MockProxy<UpdateAutoContract>
     beforeEach(() => {
-        sut = new UpdateAuto()
+        stubUpdatingAuto = mock<UpdateAutoContract>()
+        sut = new UpdateAutoController(stubUpdatingAuto)
     })
     test('should return 400 if placa is not provided', async () => {
         const request = {
@@ -102,6 +106,21 @@ describe('UpdateAuto Controller', () => {
 
         expect(response.statusCode).toBe(200);
         expect(response.msg).toEqual("created successfully");
+    });
+
+    test("should return 500 if an internal error occurs", async () => {
+        stubUpdatingAuto.execute.mockRejectedValueOnce(new Error("Internal Error"));
+        const request = {
+            id: 1,
+            cor: "any_cor",
+            placa: "any_placa",
+            marca: "any_marca",
+            status: true
+        }
+        const response = await sut.handle(request);
+
+        expect(response.statusCode).toBe(500);
+        expect(response.msg).toEqual("Internal Error");
     });
 
 });

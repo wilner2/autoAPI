@@ -6,8 +6,9 @@ import {
   Ok,
 } from "@/app/helpers/http";
 import Joi from "joi";
+import { Controller } from "./controller";
 
-export class RegisterAutoController {
+export class RegisterAutoController implements Controller {
   constructor(private registerAuto: RegisterAuto) { }
   async handle(request: any) {
     try {

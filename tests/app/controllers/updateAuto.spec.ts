@@ -23,8 +23,8 @@ describe('UpdateAuto Controller', () => {
         const response = await sut.handle(request)
 
         expect(response.statusCode).toBe(400);
-        expect(response.msg).toEqual(
-            HTTPBadRequest(new ParamsError("\"placa\" is required")).msg
+        expect(response.data).toEqual(
+            HTTPBadRequest(new ParamsError("\"placa\" is required")).data
         );
     });
 
@@ -39,8 +39,8 @@ describe('UpdateAuto Controller', () => {
         const response = await sut.handle(request)
 
         expect(response.statusCode).toBe(400);
-        expect(response.msg).toEqual(
-            HTTPBadRequest(new ParamsError("\"cor\" is required")).msg
+        expect(response.data).toEqual(
+            HTTPBadRequest(new ParamsError("\"cor\" is required")).data
         );
     });
 
@@ -55,8 +55,8 @@ describe('UpdateAuto Controller', () => {
         const response = await sut.handle(request)
 
         expect(response.statusCode).toBe(400);
-        expect(response.msg).toEqual(
-            HTTPBadRequest(new ParamsError("\"marca\" is required")).msg
+        expect(response.data).toEqual(
+            HTTPBadRequest(new ParamsError("\"marca\" is required")).data
         );
     });
 
@@ -71,8 +71,8 @@ describe('UpdateAuto Controller', () => {
         const response = await sut.handle(request)
 
         expect(response.statusCode).toBe(400);
-        expect(response.msg).toEqual(
-            HTTPBadRequest(new ParamsError("\"id\" is required")).msg
+        expect(response.data).toEqual(
+            HTTPBadRequest(new ParamsError("\"id\" is required")).data
         );
     });
 
@@ -87,8 +87,8 @@ describe('UpdateAuto Controller', () => {
         const response = await sut.handle(request)
 
         expect(response.statusCode).toBe(400);
-        expect(response.msg).toEqual(
-            HTTPBadRequest(new ParamsError("\"status\" is required")).msg
+        expect(response.data).toEqual(
+            HTTPBadRequest(new ParamsError("\"status\" is required")).data
         );
     });
 
@@ -105,7 +105,7 @@ describe('UpdateAuto Controller', () => {
         const response = await sut.handle(request);
 
         expect(response.statusCode).toBe(200);
-        expect(response.msg).toEqual("created successfully");
+        expect(response.data).toEqual("created successfully");
     });
 
     test("should return 500 if an internal error occurs", async () => {
@@ -120,7 +120,7 @@ describe('UpdateAuto Controller', () => {
         const response = await sut.handle(request);
 
         expect(response.statusCode).toBe(500);
-        expect(response.msg).toEqual("Internal Error");
+        expect(response.data).toEqual("Internal Error");
     });
 
 });

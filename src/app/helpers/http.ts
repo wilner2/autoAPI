@@ -1,16 +1,17 @@
-type HttpResponse = {
+export type HttpResponse = {
   statusCode: number;
-  msg: string;
+  data: any;
 };
 
+
 export const HTTPBadRequest = (error: Error): HttpResponse => {
-  return { statusCode: 400, msg: error.message };
+  return { statusCode: 400, data: error.message };
 };
 
 export const HTTPInternalServerError = (error: Error): HttpResponse => {
-  return { statusCode: 500, msg: error.message };
+  return { statusCode: 500, data: error.message };
 };
 
-export const Ok = (msg: any): HttpResponse => {
-  return { statusCode: 200, msg: msg };
+export const Ok = (data: any): HttpResponse => {
+  return { statusCode: 200, data: data };
 };

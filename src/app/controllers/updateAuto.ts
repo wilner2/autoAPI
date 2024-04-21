@@ -1,20 +1,13 @@
 import Joi from "joi"
 import { ParamsError } from "@/app/helpers/excepetions";
-import { HTTPBadRequest, HTTPInternalServerError, Ok } from "@/app/helpers/http";
+import { HTTPBadRequest, HTTPInternalServerError, HttpResponse, Ok } from "@/app/helpers/http";
 import { UpdateAutoContract } from "@/contracts/useCases/updateAuto";
+import { Controller } from "./controller";
 
-interface UpdatingAuto {
-    handle(request: any): Promise<UpdatingAuto.Output>
-}
-export namespace UpdatingAuto {
-    export type Output = { statusCode: number, msg: any }
-}
-
-
-export class UpdateAutoController implements UpdatingAuto {
+export class UpdateAutoController implements Controller {
     constructor(private updateAutoCase: UpdateAutoContract) { }
 
-    async handle(request: any): Promise<UpdatingAuto.Output> {
+    async handle(request: any): Promise<HttpResponse> {
         try {
 
             const validation = this.validate(request)

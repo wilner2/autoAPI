@@ -21,8 +21,8 @@ describe("registerAuto Controller", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(400);
-    expect(response.msg).toEqual(
-      HTTPBadRequest(new ParamsError("\"placa\" is required")).msg
+    expect(response.data).toEqual(
+      HTTPBadRequest(new ParamsError("\"placa\" is required")).data
     );
   });
   test("should return 400 if placa is not provided", async () => {
@@ -33,8 +33,8 @@ describe("registerAuto Controller", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(400);
-    expect(response.msg).toEqual(
-      HTTPBadRequest(new ParamsError("\"marca\" is required")).msg
+    expect(response.data).toEqual(
+      HTTPBadRequest(new ParamsError("\"marca\" is required")).data
     );
   });
   test("should return 400 if placa is not provided", async () => {
@@ -45,7 +45,7 @@ describe("registerAuto Controller", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(400);
-    expect(response.msg).toEqual(HTTPBadRequest(new ParamsError("\"cor\" is required")).msg);
+    expect(response.data).toEqual(HTTPBadRequest(new ParamsError("\"cor\" is required")).data);
   });
 
   test("should return 500 if an internal error occurs", async () => {
@@ -58,7 +58,7 @@ describe("registerAuto Controller", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(500);
-    expect(response.msg).toEqual("Internal Error");
+    expect(response.data).toEqual("Internal Error");
   });
 
   test("should return 200 if auto created successfully", async () => {
@@ -71,6 +71,6 @@ describe("registerAuto Controller", () => {
     const response = await sut.handle(request);
 
     expect(response.statusCode).toBe(200);
-    expect(response.msg).toEqual("created successfully");
+    expect(response.data).toEqual("created successfully");
   });
 });

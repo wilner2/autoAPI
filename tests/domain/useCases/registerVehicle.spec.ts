@@ -1,4 +1,4 @@
-import { CreateVehicle } from "@/contracts/repos/createVehicle";
+import { CreateVehicle } from "@/contracts/repos/vehicle";
 import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
 import { RegisterVehicleCase } from "@/domain/useCases/registerVehicle";
 import { MockProxy, mock } from "jest-mock-extended";

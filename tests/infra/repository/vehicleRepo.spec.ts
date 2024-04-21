@@ -1,4 +1,4 @@
-import { CreateVehicle } from "@/contracts/repos/createVehicle";
+import { CreateVehicle } from "@/contracts/repos/vehicle";
 import { Vehicle } from "@/infra/entities/vehicle";
 import { VehicleRepository } from "@/infra/repositories/vehicleRepo";
 import { DataType, IMemoryDb, newDb } from "pg-mem";

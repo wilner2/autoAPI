@@ -88,4 +88,20 @@ describe('UpdateAuto Controller', () => {
         );
     });
 
+    test("should return 200 if auto updated successfully", async () => {
+        const request = {
+            id: 1,
+            cor: "any_cor",
+            placa: "any_placa",
+            marca: "any_marca",
+            status: true
+        }
+
+
+        const response = await sut.handle(request);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.msg).toEqual("created successfully");
+    });
+
 });

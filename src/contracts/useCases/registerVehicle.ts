@@ -1,3 +1,3 @@
-export interface RegisterAuto {
+export interface RegisterVehicle {
   execute(request: any): Promise<any>;
 }

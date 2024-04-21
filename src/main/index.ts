@@ -1,7 +1,7 @@
 import "reflect-metadata"
 import './config/configAlias'
 import express, { json } from 'express'
-import { RegisterAutoController } from "@/app/controllers/registerAuto"
+import { RegisterAutoController } from "@/app/controllers/registerVehicle"
 import { RegisterAutoCase } from "@/domain/useCases/registerAuto"
 import { AutoRepository } from "@/infra/repositories/autoRepo"
 import { AppDataSource } from "@/infra/conf/datasource"

@@ -1,19 +1,19 @@
-import { CreateAuto } from "@/contracts/repos/createAuto";
-import { Auto } from "@/infra/entities/auto";
-import { AutoRepository } from "@/infra/repositories/autoRepo";
+import { CreateVehicle } from "@/contracts/repos/createVehicle";
+import { Vehicle } from "@/infra/entities/vehicle";
+import { VehicleRepository } from "@/infra/repositories/vehicleRepo";
 import { DataType, IMemoryDb, newDb } from "pg-mem";
 import { DataSource } from "typeorm";
 import MockDate from 'mockdate'
 
 
-describe('Create Auto repository', () => {
+describe('Create Vehicle repository', () => {
 
 
     let dataSource: DataSource
     let db: IMemoryDb
-    let sut: AutoRepository
+    let sut: VehicleRepository
 
-    const request: CreateAuto.Input = {
+    const request: CreateVehicle.Input = {
         cor: 'any_cor',
         marca: 'any_marca',
         placa: 'any_placa'
@@ -62,24 +62,24 @@ describe('Create Auto repository', () => {
         dataSource = db.adapters.createTypeormDataSource({
             type: 'postgres',
             port: 6566,
-            entities: [Auto],
+            entities: [Vehicle],
             logging: false,
         })
         await dataSource.initialize()
         await dataSource.synchronize()
-        sut = new AutoRepository(dataSource)
+        sut = new VehicleRepository(dataSource)
     })
 
     test('should call getRepository', async () => {
         const getRepositorySpy = jest.spyOn(sut, 'getRepository')
         await sut.create(request)
 
-        expect(getRepositorySpy).toHaveBeenCalledWith(Auto)
+        expect(getRepositorySpy).toHaveBeenCalledWith(Vehicle)
         expect(getRepositorySpy).toHaveBeenCalledTimes(1)
     });
 
-    test('should save auto in database', async () => {
-        const repository = jest.spyOn(sut.getRepository(Auto), 'save')
+    test('should save Vehicle in database', async () => {
+        const repository = jest.spyOn(sut.getRepository(Vehicle), 'save')
         request.placa = "any_placa2"
         await sut.create(request)
 
@@ -88,7 +88,7 @@ describe('Create Auto repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
-    test('should return auto saved', async () => {
+    test('should return Vehicle saved', async () => {
         request.placa = "any_placa3"
 
         const response = await sut.create(request)

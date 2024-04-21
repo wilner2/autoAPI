@@ -1,16 +1,16 @@
-import { RegisterAutoController } from "@/app/controllers/registerAuto";
-import { RegisterAuto } from "@/contracts/useCases/registerAuto";
+import { RegisterVehicleController } from "@/app/controllers/registerVehicle";
+import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
 import { MockProxy, mock } from "jest-mock-extended";
 
-describe("registerAuto Controller", () => {
-  let sut: RegisterAutoController;
-  let stubRegisterAuto: MockProxy<RegisterAuto>;
+describe("registerVehicle Controller", () => {
+  let sut: RegisterVehicleController;
+  let stubRegisterVehicle: MockProxy<RegisterVehicle>;
 
   beforeEach(() => {
-    stubRegisterAuto = mock<RegisterAuto>();
-    sut = new RegisterAutoController(stubRegisterAuto);
+    stubRegisterVehicle = mock<RegisterVehicle>();
+    sut = new RegisterVehicleController(stubRegisterVehicle);
   });
 
   test("should return 400 if placa is not provided", async () => {
@@ -49,7 +49,7 @@ describe("registerAuto Controller", () => {
   });
 
   test("should return 500 if an internal error occurs", async () => {
-    stubRegisterAuto.execute.mockRejectedValueOnce(new Error("Internal Error"));
+    stubRegisterVehicle.execute.mockRejectedValueOnce(new Error("Internal Error"));
     const request = {
       placa: "any_placa",
       cor: "any_cor",
@@ -61,7 +61,7 @@ describe("registerAuto Controller", () => {
     expect(response.data).toEqual("Internal Error");
   });
 
-  test("should return 200 if auto created successfully", async () => {
+  test("should return 200 if Vehicle created successfully", async () => {
     const request = {
       placa: "any_placa",
       cor: "any_cor",

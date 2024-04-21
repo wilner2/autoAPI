@@ -1,4 +1,4 @@
-import { RegisterAuto } from "@/contracts/useCases/registerAuto";
+import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
 import { ParamsError } from "@/app/helpers/excepetions";
 import {
   HTTPBadRequest,
@@ -8,15 +8,15 @@ import {
 import Joi from "joi";
 import { Controller } from "./controller";
 
-export class RegisterAutoController implements Controller {
-  constructor(private registerAuto: RegisterAuto) { }
+export class RegisterVehicleController implements Controller {
+  constructor(private registerVehicle: RegisterVehicle) { }
   async handle(request: any) {
     try {
       const validation = this.validate(request)
       if (validation) {
         return HTTPBadRequest(new ParamsError(validation));
       }
-      await this.registerAuto.execute(request);
+      await this.registerVehicle.execute(request);
       return Ok("created successfully");
     } catch (error) {
       return HTTPInternalServerError(error);

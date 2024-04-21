@@ -1,11 +1,11 @@
 import Joi from "joi"
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest, HTTPInternalServerError, HttpResponse, Ok } from "@/app/helpers/http";
-import { UpdateAutoContract } from "@/contracts/useCases/updateAuto";
+import { UpdateVehicleContract } from "@/contracts/useCases/updateVehicle";
 import { Controller } from "./controller";
 
-export class UpdateAutoController implements Controller {
-    constructor(private updateAutoCase: UpdateAutoContract) { }
+export class UpdateVehicleController implements Controller {
+    constructor(private updateVehicleCase: UpdateVehicleContract) { }
 
     async handle(request: any): Promise<HttpResponse> {
         try {
@@ -14,7 +14,7 @@ export class UpdateAutoController implements Controller {
             if (validation) {
                 return HTTPBadRequest(new ParamsError(validation));
             }
-            await this.updateAutoCase.execute(request)
+            await this.updateVehicleCase.execute(request)
             return Ok("created successfully");
         } catch (error) {
             return HTTPInternalServerError(error)

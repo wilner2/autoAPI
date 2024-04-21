@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm"
 
 @Entity('automovel')
-export class Auto {
+export class Vehicle {
     @PrimaryGeneratedColumn()
     id!: Date
 

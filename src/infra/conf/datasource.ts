@@ -1,4 +1,4 @@
-import { Auto } from "@/infra/entities/auto";
+import { Vehicle } from "@/infra/entities/vehicle";
 import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
     schema: "public",
     synchronize: true,
     logging: false,
-    entities: [Auto],
+    entities: [Vehicle],
     subscribers: [],
     migrations: [],
 })

@@ -1,16 +1,16 @@
-import { UpdateAutoController } from "@/app/controllers/updateAuto";
+import { UpdateVehicleController } from "@/app/controllers/updateVehicle";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
-import { UpdateAutoContract } from "@/contracts/useCases/updateAuto";
+import { UpdateVehicleContract } from "@/contracts/useCases/updateVehicle";
 import { MockProxy, mock } from "jest-mock-extended";
 
-describe('UpdateAuto Controller', () => {
+describe('UpdateVehicle Controller', () => {
 
-    let sut: UpdateAutoController
-    let stubUpdatingAuto: MockProxy<UpdateAutoContract>
+    let sut: UpdateVehicleController
+    let stubUpdatingVehicle: MockProxy<UpdateVehicleContract>
     beforeEach(() => {
-        stubUpdatingAuto = mock<UpdateAutoContract>()
-        sut = new UpdateAutoController(stubUpdatingAuto)
+        stubUpdatingVehicle = mock<UpdateVehicleContract>()
+        sut = new UpdateVehicleController(stubUpdatingVehicle)
     })
     test('should return 400 if placa is not provided', async () => {
         const request = {
@@ -92,7 +92,7 @@ describe('UpdateAuto Controller', () => {
         );
     });
 
-    test("should return 200 if auto updated successfully", async () => {
+    test("should return 200 if Vehicle updated successfully", async () => {
         const request = {
             id: 1,
             cor: "any_cor",
@@ -109,7 +109,7 @@ describe('UpdateAuto Controller', () => {
     });
 
     test("should return 500 if an internal error occurs", async () => {
-        stubUpdatingAuto.execute.mockRejectedValueOnce(new Error("Internal Error"));
+        stubUpdatingVehicle.execute.mockRejectedValueOnce(new Error("Internal Error"));
         const request = {
             id: 1,
             cor: "any_cor",

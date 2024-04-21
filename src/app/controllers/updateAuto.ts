@@ -1,27 +1,33 @@
 import Joi from "joi"
-import { ParamsError } from "../helpers/excepetions";
-import { HTTPBadRequest, Ok } from "../helpers/http";
+import { ParamsError } from "@/app/helpers/excepetions";
+import { HTTPBadRequest, HTTPInternalServerError, Ok } from "@/app/helpers/http";
+import { UpdateAutoContract } from "@/contracts/useCases/updateAuto";
 
-export interface UpdatingAuto {
-    handle(request: UpdatingAuto.Input): Promise<UpdatingAuto.Output>
+interface UpdatingAuto {
+    handle(request: any): Promise<UpdatingAuto.Output>
 }
 export namespace UpdatingAuto {
-    export type Input = { id?: number, placa?: string, cor?: string, marca?: string, status?: Boolean }
     export type Output = { statusCode: number, msg: any }
 }
 
 
-export class UpdateAuto implements UpdatingAuto {
-    constructor() { }
+export class UpdateAutoController implements UpdatingAuto {
+    constructor(private updateAutoCase: UpdateAutoContract) { }
 
-    async handle(request: UpdatingAuto.Input): Promise<UpdatingAuto.Output> {
-        const validation = this.validate(request)
-        if (validation) {
-            return HTTPBadRequest(new ParamsError(validation));
+    async handle(request: any): Promise<UpdatingAuto.Output> {
+        try {
+
+            const validation = this.validate(request)
+            if (validation) {
+                return HTTPBadRequest(new ParamsError(validation));
+            }
+            await this.updateAutoCase.execute(request)
+            return Ok("created successfully");
+        } catch (error) {
+            return HTTPInternalServerError(error)
         }
-        return Ok("created successfully");
     }
-    validate(request: UpdatingAuto.Input) {
+    validate(request: any): string | undefined {
         const schema = Joi.object({
             id: Joi.number().required(),
             placa: Joi.string().required(),

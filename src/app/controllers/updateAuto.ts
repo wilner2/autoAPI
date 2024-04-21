@@ -1,6 +1,6 @@
 import Joi from "joi"
 import { ParamsError } from "../helpers/excepetions";
-import { HTTPBadRequest } from "../helpers/http";
+import { HTTPBadRequest, Ok } from "../helpers/http";
 
 export interface UpdatingAuto {
     handle(request: UpdatingAuto.Input): Promise<UpdatingAuto.Output>
@@ -19,7 +19,7 @@ export class UpdateAuto implements UpdatingAuto {
         if (validation) {
             return HTTPBadRequest(new ParamsError(validation));
         }
-        // return { statusCode: 200, msg: request }
+        return Ok("created successfully");
     }
     validate(request: UpdatingAuto.Input) {
         const schema = Joi.object({

@@ -93,7 +93,7 @@ describe('Create Vehicle repository', () => {
 
     ///Update
 
-    test('should call getRepository in update', async () => {
+    test('should call getRepository in update function', async () => {
         const getRepositorySpy = jest.spyOn(sut, 'getRepository')
         const request = { placa: 'any_placa', cor: 'any_cor', marca: 'any_marca', id: 1, status: true }
 
@@ -105,13 +105,35 @@ describe('Create Vehicle repository', () => {
 
 
     test('should update vehicle with correct params', async () => {
-
         const repository = jest.spyOn(sut.getRepository(VehicleModel), 'update')
         const { cor, marca, status, placa, id } = { placa: 'any_placa', cor: 'any_cor', marca: 'any_marca', id: 1, status: true }
 
         await sut.update({ cor, marca, status, placa, id })
 
         expect(repository).toHaveBeenCalledWith({ id: id }, { cor, marca, status, placa })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
+    ///exists
+
+    test('should call getRepository in exists function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+        const request = 1
+
+        await sut.exists(request)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(VehicleModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+
+    test('should exists vehicle with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'exists')
+        const { id } = { id: 1 }
+
+        await sut.exists(id)
+
+        expect(repository).toHaveBeenCalledWith({ where: { id } })
         expect(repository).toHaveBeenCalledTimes(1)
     });
 

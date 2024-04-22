@@ -19,3 +19,7 @@ export const Ok = (data: any): HttpResponse => {
 export const HTTPNotFound = (error: Error): HttpResponse => {
   return { statusCode: 404, data: error.message };
 };
+
+export const HTTPConflict = (error: Error): HttpResponse => {
+  return { statusCode: 409, data: error.message };
+};

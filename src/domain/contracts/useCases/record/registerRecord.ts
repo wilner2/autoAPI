@@ -4,5 +4,5 @@ export interface RegisterRecord {
 }
 export namespace RegisterRecord {
     export type Input = { idAutomovel: number, idMotorista: number, }
-    export type Output = Promise<void | { recordInProgress: boolean }>
+    export type Output = Promise<{ recordInProgress: boolean }>
 }

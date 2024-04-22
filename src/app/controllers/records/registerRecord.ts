@@ -1,5 +1,5 @@
 import { RegisterRecord } from "@/domain/contracts/useCases/record";
-import { HTTPBadRequest, HTTPInternalServerError, Ok, ParamsError } from "@/app/helpers";
+import { HTTPBadRequest, HTTPConflict, HTTPInternalServerError, Ok, ParamsError, RecordInProgress } from "@/app/helpers";
 import { Controller } from "../controller";
 
 import Joi from "joi";
@@ -12,7 +12,10 @@ export class RegisterRecordController implements Controller {
             if (validation) {
                 return HTTPBadRequest(new ParamsError(validation));
             }
-            await this.registerRecord.execute(request);
+            const result = await this.registerRecord.execute(request);
+            if (result.recordInProgress) {
+                return HTTPConflict(new RecordInProgress("Vehicle or Driver with record in progress"))
+            }
             return Ok("created successfully");
         } catch (error) {
             return HTTPInternalServerError(error);

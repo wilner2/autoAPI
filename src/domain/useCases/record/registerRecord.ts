@@ -10,5 +10,6 @@ export class RegisterRecordCase implements RegisterRecord {
             return { recordInProgress: true }
         }
         await this.createRecord.create(register);
+        return { recordInProgress: false }
     }
 }

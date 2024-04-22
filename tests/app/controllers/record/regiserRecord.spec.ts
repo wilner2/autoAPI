@@ -43,11 +43,22 @@ describe("RegisterRecord Controller", () => {
     });
 
     test("should return 200 if record created successfully", async () => {
+        stubRegisterRecord.execute.mockResolvedValueOnce({ recordInProgress: false })
         const request = { idAutomovel: 1, idMotorista: 1 };
 
         const response = await sut.handle(request);
 
         expect(response.statusCode).toBe(200);
         expect(response.data).toEqual("created successfully");
+    });
+
+    test("should return 409 if record be in progress", async () => {
+        stubRegisterRecord.execute.mockResolvedValueOnce({ recordInProgress: true })
+        const request = { idAutomovel: 1, idMotorista: 1 };
+
+        const response = await sut.handle(request);
+
+        expect(response.statusCode).toBe(409);
+        expect(response.data).toEqual("Vehicle or Driver with record in progress");
     });
 });

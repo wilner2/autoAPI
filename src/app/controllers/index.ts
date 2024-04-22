@@ -8,6 +8,7 @@ export * from './driver/registerDriver'
 export * from './driver/updateDriver'
 export * from './driver/deleteDriver'
 export * from './driver/recoveryDriver'
+export * from './driver/listDriver'
 
 
 export * from './controller'

@@ -12,13 +12,8 @@ describe('UpdateAuto Usecase', () => {
     })
     test('should call update Vehicle on repository', async () => {
 
-        const request = Vehicle.create({
-            placa: "any_placa",
-            cor: "any_cor",
-            marca: "any_marca",
-            id: 1,
-            status: true
-        })
+        const request = new Vehicle('any_placa', 'any_cor', 'any_marca', 1, true)
+
         const spyAutoRepository = jest.spyOn(stubAutoRepository, "update")
         sut.execute(request)
 

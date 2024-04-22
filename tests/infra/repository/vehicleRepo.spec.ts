@@ -1,18 +1,16 @@
 import { CreateVehicle } from "@/contracts/repos/vehicle";
-import { Vehicle } from "@/infra/entities/vehicle";
+import { VehicleModel } from "@/infra/entities/vehicle";
 import { VehicleRepository } from "@/infra/repositories/vehicleRepo";
 import { DataType, IMemoryDb, newDb } from "pg-mem";
 import { DataSource } from "typeorm";
 import MockDate from 'mockdate'
+import { Vehicle } from "@/domain/entities/vehicle";
 
 
 describe('Create Vehicle repository', () => {
-
-
     let dataSource: DataSource
     let db: IMemoryDb
     let sut: VehicleRepository
-
     const request: CreateVehicle.Input = {
         cor: 'any_cor',
         marca: 'any_marca',
@@ -62,7 +60,7 @@ describe('Create Vehicle repository', () => {
         dataSource = db.adapters.createTypeormDataSource({
             type: 'postgres',
             port: 6566,
-            entities: [Vehicle],
+            entities: [VehicleModel],
             logging: false,
         })
         await dataSource.initialize()
@@ -74,15 +72,14 @@ describe('Create Vehicle repository', () => {
         const getRepositorySpy = jest.spyOn(sut, 'getRepository')
         await sut.create(request)
 
-        expect(getRepositorySpy).toHaveBeenCalledWith(Vehicle)
+        expect(getRepositorySpy).toHaveBeenCalledWith(VehicleModel)
         expect(getRepositorySpy).toHaveBeenCalledTimes(1)
     });
 
     test('should save Vehicle in database', async () => {
-        const repository = jest.spyOn(sut.getRepository(Vehicle), 'save')
+        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'save')
         request.placa = "any_placa2"
         await sut.create(request)
-
 
         expect(repository).toHaveBeenCalledWith({ ...request, created_at: new Date().toISOString(), status: true, id: 2 })
         expect(repository).toHaveBeenCalledTimes(1)
@@ -93,9 +90,40 @@ describe('Create Vehicle repository', () => {
 
         const response = await sut.create(request)
 
-
         expect(response).toEqual({ ...request, created_at: new Date().toISOString(), status: true, id: 3 })
     });
+
+    ///Update
+
+    test('should call getRepository in update', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+        const request = new Vehicle('any_placa', 'any_cor', 'any_marca', 1, true)
+        await sut.update(request)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(VehicleModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+    test('should findOf Vehicle in database on Update', async () => {
+        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'findOneBy')
+        const request = new Vehicle('any_placa', 'any_cor', 'any_marca', 1, true)
+        await sut.update(request)
+
+        expect(repository).toHaveBeenCalledWith({ id: request.id })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
+    test('should save Vehicle in database in Update', async () => {
+
+        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'save')
+        const request = new Vehicle('any_placa', 'any_cor', 'any_marca', 1, true)
+
+        await sut.update(request)
+
+        expect(repository).toHaveBeenCalledWith({ ...request, created_at: new Date() })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
 
 
 });

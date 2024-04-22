@@ -11,8 +11,6 @@ export namespace CreateVehicle {
   export type Output = VehicleModel
 }
 
-
-
 export interface UpdateVehicle {
   update(vehicle: UpdateVehicle.Input): Promise<void>
 }
@@ -21,7 +19,6 @@ export namespace UpdateVehicle {
     placa?: string, cor?: string, marca?: string, id: number, status?: boolean,
   }
 }
-
 
 export interface ExistsVehicle {
   exists(id: ExistsVehicle.Input): ExistsVehicle.Output
@@ -34,6 +31,7 @@ export namespace ExistsVehicle {
 export interface ListVehicle {
   list(data: ListVehicle.Input): ListVehicle.Output
 }
+
 export namespace ListVehicle {
   export type Input = { marca?: string, cor?: string, limit: number, offset: number }
   export type Output = Promise<Array<{ id: number, created_at: Date, status: Boolean, placa: string, cor: string, marca: string }>>

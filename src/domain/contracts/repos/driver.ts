@@ -16,10 +16,18 @@ export namespace ExistsDriver {
     export type Output = Promise<boolean>
 }
 
-
 export interface UpdateDriver {
     update(vehicle: UpdateDriver.Input): Promise<void>
 }
 export namespace UpdateDriver {
     export type Input = { id: number, status?: boolean, nome?: string }
+}
+
+export interface ListDriver {
+    list(data: ListDriver.Input): ListDriver.Output
+}
+
+export namespace ListDriver {
+    export type Input = { nome?: string, limit: number, offset: number }
+    export type Output = Promise<Array<{ id: number, created_at: Date, status: Boolean, nome: string }>>
 }

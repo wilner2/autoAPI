@@ -1,7 +1,8 @@
 
-export interface DeleteVehicle {
-    execute(request: DeleteVehicle.Input): Promise<void>;
+export interface DeletingVehicle {
+    execute(request: DeletingVehicle.Input): DeletingVehicle.Output;
 }
-export namespace DeleteVehicle {
+export namespace DeletingVehicle {
     export type Input = { id: string }
+    export type Output = Promise<{ vehicleNotFounded: Boolean }>
 }

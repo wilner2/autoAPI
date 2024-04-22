@@ -31,6 +31,3 @@ export namespace ExistsVehicle {
   export type Output = Promise<boolean>
 
 }
-
-
-

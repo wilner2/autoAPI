@@ -5,19 +5,16 @@ import { PgRepository } from "./repository";
 
 export class VehicleRepository extends PgRepository implements CreateVehicle, UpdateVehicle {
 
-    async create({ cor, marca, placa }: CreateVehicle.Input) {
+    async create({ cor, marca, placa }: CreateVehicle.Input): Promise<CreateVehicle.Output> {
         const repository = this.getRepository(VehicleModel)
         const response = await repository.save({ cor, marca, placa, created_at: new Date().toISOString(), status: true })
         return response
     }
 
-    async update(vehicle: UpdateVehicle.Input): Promise<void> {
+    async update({ cor, marca, status, placa, id }: UpdateVehicle.Input): Promise<void> {
         const repository = this.getRepository(VehicleModel)
-        const vehicleToUpdate = await repository.findOneBy({
-            id: vehicle.id,
-        })
-        const vehicleUpdated = vehicle.update(vehicleToUpdate!)
-        await repository.save(vehicleUpdated)
+        await repository.update({ id: id }, { cor, marca, status, placa })
+
     }
 
 } 

@@ -5,19 +5,19 @@ export class VehicleModel {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @Column()
+    @Column({ nullable: false })
     cor!: string
 
-    @Column()
+    @Column({ nullable: false })
     marca!: string
 
-    @Column({ unique: true })
+    @Column({ unique: true, nullable: false })
     placa!: string
 
     @Column({ type: 'timestamptz' })
     created_at!: Date
 
-    @Column()
+    @Column({ nullable: false })
     status!: boolean
 
 }

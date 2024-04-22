@@ -1,17 +1,15 @@
-import { CreateVehicle } from "@/contracts/repos/vehicle";
 import { VehicleModel } from "@/infra/entities/vehicle";
 import { VehicleRepository } from "@/infra/repositories/vehicleRepo";
 import { DataType, IMemoryDb, newDb } from "pg-mem";
 import { DataSource } from "typeorm";
 import MockDate from 'mockdate'
-import { Vehicle } from "@/domain/entities/vehicle";
 
 
 describe('Create Vehicle repository', () => {
     let dataSource: DataSource
     let db: IMemoryDb
     let sut: VehicleRepository
-    const request: CreateVehicle.Input = {
+    const request = {
         cor: 'any_cor',
         marca: 'any_marca',
         placa: 'any_placa'
@@ -97,30 +95,23 @@ describe('Create Vehicle repository', () => {
 
     test('should call getRepository in update', async () => {
         const getRepositorySpy = jest.spyOn(sut, 'getRepository')
-        const request = new Vehicle('any_placa', 'any_cor', 'any_marca', 1, true)
+        const request = { placa: 'any_placa', cor: 'any_cor', marca: 'any_marca', id: 1, status: true }
+
         await sut.update(request)
 
         expect(getRepositorySpy).toHaveBeenCalledWith(VehicleModel)
         expect(getRepositorySpy).toHaveBeenCalledTimes(1)
     });
 
-    test('should findOf Vehicle in database on Update', async () => {
-        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'findOneBy')
-        const request = new Vehicle('any_placa', 'any_cor', 'any_marca', 1, true)
-        await sut.update(request)
 
-        expect(repository).toHaveBeenCalledWith({ id: request.id })
-        expect(repository).toHaveBeenCalledTimes(1)
-    });
+    test('should update vehicle with correct params', async () => {
 
-    test('should save Vehicle in database in Update', async () => {
+        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'update')
+        const { cor, marca, status, placa, id } = { placa: 'any_placa', cor: 'any_cor', marca: 'any_marca', id: 1, status: true }
 
-        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'save')
-        const request = new Vehicle('any_placa', 'any_cor', 'any_marca', 1, true)
+        await sut.update({ cor, marca, status, placa, id })
 
-        await sut.update(request)
-
-        expect(repository).toHaveBeenCalledWith({ ...request, created_at: new Date() })
+        expect(repository).toHaveBeenCalledWith({ id: id }, { cor, marca, status, placa })
         expect(repository).toHaveBeenCalledTimes(1)
     });
 

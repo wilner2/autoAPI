@@ -1,16 +1,23 @@
-import { Vehicle } from "@/domain/entities/vehicle";
+import { VehicleModel } from "@/infra/entities/vehicle";
 
 export interface CreateVehicle {
   create(vehicle: CreateVehicle.Input): Promise<CreateVehicle.Output>;
 }
 
 export namespace CreateVehicle {
-  export type Input = { cor: string, marca: string, placa: string }
-  export type Output = { cor: string; marca: string; placa: string; created_at: Date; status: true; }
+  export type Input = {
+    placa: string, cor: string, marca: string,
+  }
+  export type Output = VehicleModel
 }
+
+
+
 export interface UpdateVehicle {
   update(vehicle: UpdateVehicle.Input): Promise<void>
 }
 export namespace UpdateVehicle {
-  export type Input = Vehicle
+  export type Input = {
+    placa?: string, cor?: string, marca?: string, id: number, status?: boolean,
+  }
 }

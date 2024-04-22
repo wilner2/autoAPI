@@ -11,11 +11,7 @@ describe("RegisterVehicle UseCases", () => {
     sut = new RegisterVehicleCase(stubCreateVehicleORM);
   });
   test("should create Vehicle", async () => {
-    const request = {
-      placa: "any_placa",
-      cor: "any_cor",
-      marca: "any_marca",
-    };
+    const request = { placa: 'any_placa', cor: 'any_cor', marca: 'any_marca' }
     await sut.execute(request);
     const spy = jest.spyOn(stubCreateVehicleORM, "create");
 

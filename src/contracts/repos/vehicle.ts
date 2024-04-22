@@ -32,9 +32,9 @@ export namespace ExistsVehicle {
 }
 
 export interface ListVehicle {
-  list(id: ListVehicle.Input): ListVehicle.Output
+  list(data: ListVehicle.Input): ListVehicle.Output
 }
 export namespace ListVehicle {
-  export type Input = { marca?: string, cor?: string, limit: Number, offset: Number }
-  export type Output = Promise<Array<{ id: Number, create_at: Date, status: Boolean, placa: string, cor: string, marca: string }>>
+  export type Input = { marca?: string, cor?: string, limit: number, offset: number }
+  export type Output = Promise<Array<{ id: number, created_at: Date, status: Boolean, placa: string, cor: string, marca: string }>>
 }

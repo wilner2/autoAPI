@@ -1,9 +1,9 @@
 import { VehicleModel } from "@/infra/entities/vehicle";
-import { CreateVehicle, UpdateVehicle, ExistsVehicle } from "@/contracts/repos/vehicle";
+import { CreateVehicle, UpdateVehicle, ExistsVehicle, ListVehicle } from "@/contracts/repos/vehicle";
 import { PgRepository } from "./repository";
 
 
-export class VehicleRepository extends PgRepository implements CreateVehicle, UpdateVehicle, ExistsVehicle {
+export class VehicleRepository extends PgRepository implements CreateVehicle, UpdateVehicle, ExistsVehicle, ListVehicle {
 
     async create({ cor, marca, placa }: CreateVehicle.Input): Promise<CreateVehicle.Output> {
         const repository = this.getRepository(VehicleModel)
@@ -20,6 +20,12 @@ export class VehicleRepository extends PgRepository implements CreateVehicle, Up
     async exists(id: ExistsVehicle.Input): ExistsVehicle.Output {
         const repository = this.getRepository(VehicleModel)
         return await repository.exists({ where: { id } })
+    }
+
+    async list({ offset = 0, limit = 10, marca, cor }: ListVehicle.Input): ListVehicle.Output {
+        const repository = this.getRepository(VehicleModel)
+        return await repository.find({ skip: offset, take: limit, where: { marca: marca, cor: cor } })
+
     }
 
 

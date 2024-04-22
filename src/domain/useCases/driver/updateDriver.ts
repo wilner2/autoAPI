@@ -10,7 +10,7 @@ export class UpdateDriverCase implements UpdatingDriver {
             return { driverNotFounded: true }
         }
 
-        await this.updatedriver.update({ nome: driver.nome, })
+        await this.updatedriver.update({ id: driver.id, nome: driver.nome, status: driver.status })
         return { driverNotFounded: false }
     }
 }

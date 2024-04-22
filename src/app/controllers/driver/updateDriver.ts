@@ -27,6 +27,7 @@ export class UpdateDriverController implements Controller {
         const schema = Joi.object({
             id: Joi.number().required(),
             nome: Joi.string(),
+            status: Joi.boolean(),
         })
         const validation = schema.validate(request)
         if (validation) {

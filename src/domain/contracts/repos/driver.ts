@@ -8,8 +8,6 @@ export namespace CreateDriver {
     export type Input = { nome: string }
 }
 
-
-
 export interface ExistsDriver {
     exists(id: ExistsDriver.Input): ExistsDriver.Output
 }
@@ -23,5 +21,5 @@ export interface UpdateDriver {
     update(vehicle: UpdateDriver.Input): Promise<void>
 }
 export namespace UpdateDriver {
-    export type Input = { nome?: string, }
+    export type Input = { id: number, status?: boolean, nome?: string }
 }

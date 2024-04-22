@@ -7,6 +7,7 @@ describe("RegisterRecord UseCases", () => {
     let sut: RegisterRecord;
     let stubCreateRecordORM: MockProxy<CreateRecord>;
     let stubRecordInProgress: MockProxy<RecordInProgress>;
+    const request = { idMotorista: 1, idAutomovel: 1, desc: "any_desc" }
     beforeEach(() => {
         stubCreateRecordORM = mock<CreateRecord>();
         stubRecordInProgress = mock<RecordInProgress>();
@@ -14,7 +15,6 @@ describe("RegisterRecord UseCases", () => {
     });
     test("should create driver", async () => {
         stubRecordInProgress.findRecordInProgress.mockResolvedValueOnce(false)
-        const request = { idMotorista: 1, idAutomovel: 1 }
         await sut.execute(request);
         const spy = jest.spyOn(stubCreateRecordORM, "create");
 
@@ -23,7 +23,6 @@ describe("RegisterRecord UseCases", () => {
     });
 
     test("should call function verify if exists record in progresss by idMotorista and idAutomovel", async () => {
-        const request = { idMotorista: 1, idAutomovel: 1 }
         await sut.execute(request);
         const spy = jest.spyOn(stubRecordInProgress, "findRecordInProgress");
 
@@ -34,7 +33,6 @@ describe("RegisterRecord UseCases", () => {
     test("should return recordInProgress equals true", async () => {
         stubRecordInProgress.findRecordInProgress.mockResolvedValueOnce(true)
 
-        const request = { idMotorista: 1, idAutomovel: 1 }
         const response = await sut.execute(request);
 
         expect(response).toEqual({ recordInProgress: true });

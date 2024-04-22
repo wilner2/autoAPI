@@ -22,7 +22,7 @@ export class DeleteVehicleController implements Controller {
         }
     }
 
-    validate(request: { placa: string }) {
+    validate(request: any): string | undefined {
         const schema = Joi.object({
             id: Joi.number().required(),
         })

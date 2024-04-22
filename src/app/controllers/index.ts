@@ -5,6 +5,7 @@ export * from './vehicles/registerVehicle'
 export * from './vehicles/updateVehicle'
 
 export * from './driver/registerDriver'
+export * from './driver/updateDriver'
 
 
 export * from './controller'

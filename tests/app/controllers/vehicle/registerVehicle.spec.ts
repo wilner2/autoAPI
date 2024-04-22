@@ -25,7 +25,7 @@ describe("registerVehicle Controller", () => {
       HTTPBadRequest(new ParamsError("\"placa\" is required")).data
     );
   });
-  test("should return 400 if placa is not provided", async () => {
+  test("should return 400 if marca is not provided", async () => {
     const request = {
       placa: "any_placa",
       cor: "any_cor",
@@ -37,7 +37,7 @@ describe("registerVehicle Controller", () => {
       HTTPBadRequest(new ParamsError("\"marca\" is required")).data
     );
   });
-  test("should return 400 if placa is not provided", async () => {
+  test("should return 400 if cor is not provided", async () => {
     const request = {
       placa: "any_placa",
       marca: "any_marca",

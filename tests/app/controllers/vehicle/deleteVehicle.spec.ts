@@ -1,7 +1,7 @@
-import { DeleteVehicleController } from "@/app/controllers/deleteVehicle";
+import { DeleteVehicleController } from "@/app/controllers/vehicles/deleteVehicle";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
-import { DeletingVehicle } from "@/contracts/useCases/deleteVehicle";
+import { DeletingVehicle } from "@/domain/contracts/useCases/vehicles/deleteVehicle";
 import { MockProxy, mock } from "jest-mock-extended";
 
 describe('DeleteVehicle Controller', () => {

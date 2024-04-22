@@ -1,5 +1,5 @@
-import { CreateVehicle } from "@/contracts/repos/vehicle";
-import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
+import { CreateVehicle } from "@/domain/contracts/repos/vehicle";
+import { RegisterVehicle } from "@/domain/contracts/useCases/vehicles";
 
 export class RegisterVehicleCase implements RegisterVehicle {
   constructor(private createVehicle: CreateVehicle) { }

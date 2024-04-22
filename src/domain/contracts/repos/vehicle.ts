@@ -1,4 +1,4 @@
-import { VehicleModel } from "@/infra/entities/vehicle";
+import { VehicleModel } from "@/infra/entities";
 
 export interface CreateVehicle {
   create(vehicle: CreateVehicle.Input): Promise<CreateVehicle.Output>;

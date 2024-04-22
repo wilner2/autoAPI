@@ -1,5 +1,5 @@
-import { ListVehicle } from "@/contracts/repos/vehicle";
-import { ListingVehicle } from "@/contracts/useCases/listVehicles";
+import { ListVehicle } from "@/domain/contracts/repos/vehicle";
+import { ListingVehicle } from "@/domain/contracts/useCases/vehicles";
 
 export class ListVehicleCase implements ListingVehicle {
     constructor(private listVehicles: ListVehicle) { }

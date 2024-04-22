@@ -1,7 +1,6 @@
-import { ListingVehicle } from "@/contracts/useCases/listVehicles";
-import { Controller } from "./controller";
-import { HTTPBadRequest, HTTPInternalServerError, HttpResponse, Ok } from "../helpers/http";
-import { ParamsError } from "../helpers/excepetions";
+import { ListingVehicle } from "@/domain/contracts/useCases/vehicles";
+import { Controller } from "../controller";
+import { HTTPBadRequest, HTTPInternalServerError, HttpResponse, Ok, ParamsError } from "@/app/helpers";
 import Joi from "joi";
 
 export class ListVehiclesController implements Controller {

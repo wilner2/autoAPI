@@ -1,8 +1,7 @@
 import Joi from "joi"
-import { ParamsError, ResourceNotFound } from "@/app/helpers/excepetions";
-import { HTTPBadRequest, HTTPInternalServerError, HTTPNotFound, HttpResponse, Ok } from "@/app/helpers/http";
-import { UpdateVehicleContract } from "@/contracts/useCases/updateVehicle";
-import { Controller } from "./controller";
+import { HTTPBadRequest, HTTPInternalServerError, HTTPNotFound, HttpResponse, Ok, ParamsError, ResourceNotFound } from "@/app/helpers";
+import { UpdateVehicleContract } from "@/domain/contracts/useCases/vehicles";
+import { Controller } from "../controller";
 
 export class UpdateVehicleController implements Controller {
     constructor(private updateVehicleCase: UpdateVehicleContract) { }

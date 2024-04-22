@@ -1,5 +1,5 @@
-import { ExistsVehicle, UpdateVehicle } from "@/contracts/repos/vehicle";
-import { DeleteVehicleCase } from "@/domain/useCases/deleteVehicle";
+import { ExistsVehicle, UpdateVehicle } from "@/domain/contracts/repos/vehicle";
+import { DeleteVehicleCase } from "@/domain/useCases/vehicles.ts/deleteVehicle";
 import { mock, MockProxy } from "jest-mock-extended";
 
 describe('UpdateAuto Usecase', () => {

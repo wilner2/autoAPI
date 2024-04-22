@@ -1,5 +1,5 @@
-import { VehicleModel } from "@/infra/entities/vehicle";
-import { VehicleRepository } from "@/infra/repositories/vehicleRepo";
+import { VehicleModel } from "@/infra/entities";
+import { VehicleRepository } from "@/infra/repositories";
 import { DataType, IMemoryDb, newDb } from "pg-mem";
 import { DataSource } from "typeorm";
 import MockDate from 'mockdate'

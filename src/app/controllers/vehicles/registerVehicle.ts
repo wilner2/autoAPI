@@ -1,12 +1,7 @@
-import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
-import { ParamsError } from "@/app/helpers/excepetions";
-import {
-  HTTPBadRequest,
-  HTTPInternalServerError,
-  Ok,
-} from "@/app/helpers/http";
+import { RegisterVehicle } from "@/domain/contracts/useCases/vehicles";
+import { HTTPBadRequest, HTTPInternalServerError, Ok, ParamsError } from "@/app/helpers";
 import Joi from "joi";
-import { Controller } from "./controller";
+import { Controller } from "../controller";
 
 export class RegisterVehicleController implements Controller {
   constructor(private registerVehicle: RegisterVehicle) { }

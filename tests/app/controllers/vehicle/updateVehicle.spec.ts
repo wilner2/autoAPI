@@ -1,7 +1,7 @@
-import { UpdateVehicleController } from "@/app/controllers/updateVehicle";
+import { UpdateVehicleController } from "@/app/controllers/";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
-import { UpdateVehicleContract } from "@/contracts/useCases/updateVehicle";
+import { UpdateVehicleContract } from "@/domain/contracts/useCases/vehicles";
 import { MockProxy, mock } from "jest-mock-extended";
 
 describe('UpdateVehicle Controller', () => {

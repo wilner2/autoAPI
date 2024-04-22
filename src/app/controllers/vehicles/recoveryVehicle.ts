@@ -1,27 +1,21 @@
-import { ParamsError, ResourceNotFound } from "@/app/helpers/excepetions";
-import {
-    HTTPBadRequest,
-    HTTPInternalServerError,
-    HTTPNotFound,
-    Ok,
-} from "@/app/helpers/http";
+import { HTTPBadRequest, HTTPInternalServerError, HTTPNotFound, Ok, ParamsError, ResourceNotFound } from "@/app/helpers";
 import Joi from "joi";
-import { Controller } from "./controller";
-import { DeletingVehicle } from "@/contracts/useCases/deleteVehicle";
+import { RecoveringVehicle } from "@/domain/contracts/useCases/vehicles";
+import { Controller } from "../controller";
 
-export class DeleteVehicleController implements Controller {
-    constructor(private deleteVehicle: DeletingVehicle) { }
+export class RecoveryVehicleController implements Controller {
+    constructor(private recoveryVehicle: RecoveringVehicle) { }
     async handle(request: any) {
         try {
             const validation = this.validate(request)
             if (validation) {
                 return HTTPBadRequest(new ParamsError(validation));
             }
-            const response = await this.deleteVehicle.execute(request)
+            const response = await this.recoveryVehicle.execute(request)
             if (response.vehicleNotFounded) {
                 return HTTPNotFound(new ResourceNotFound("ID not founded"))
             }
-            return Ok("Deleted successfully");
+            return Ok("recovery successfully");
         } catch (error) {
             return HTTPInternalServerError(error);
         }

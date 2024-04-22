@@ -1,5 +1,5 @@
-import { ListVehiclesController } from "@/app/controllers/listVehicles";
-import { ListingVehicle } from "@/contracts/useCases/listVehicles";
+import { ListVehiclesController } from "@/app/controllers/vehicles/listVehicles";
+import { ListingVehicle } from "@/domain/contracts/useCases/vehicles";
 import { MockProxy, mock } from "jest-mock-extended";
 import MockDate from 'mockdate'
 

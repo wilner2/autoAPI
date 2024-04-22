@@ -1,7 +1,7 @@
-import { RecoveryVehicleController } from "@/app/controllers/recoveryVehicle";
+import { RecoveryVehicleController } from "@/app/controllers/";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
-import { RecoveringVehicle } from "@/contracts/useCases/recoveryVehicle";
+import { RecoveringVehicle } from "@/domain/contracts/useCases/vehicles";
 import { MockProxy, mock } from "jest-mock-extended";
 
 describe('RecoveryVehicle Controller', () => {

@@ -1,5 +1,5 @@
-import { VehicleModel } from "@/infra/entities/vehicle";
-import { CreateVehicle, UpdateVehicle, ExistsVehicle, ListVehicle } from "@/contracts/repos/vehicle";
+import { VehicleModel } from "@/infra/entities";
+import { CreateVehicle, UpdateVehicle, ExistsVehicle, ListVehicle } from "@/domain/contracts/repos/vehicle";
 import { PgRepository } from "./repository";
 
 

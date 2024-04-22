@@ -1,5 +1,5 @@
-import { RegisterVehicleController } from "@/app/controllers/registerVehicle";
-import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
+import { RegisterVehicleController } from "@/app/controllers/";
+import { RegisterVehicle } from "@/domain/contracts/useCases/vehicles";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
 import { MockProxy, mock } from "jest-mock-extended";

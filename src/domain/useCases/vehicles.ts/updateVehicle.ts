@@ -1,5 +1,5 @@
-import { ExistsVehicle, UpdateVehicle } from "@/contracts/repos/vehicle";
-import { UpdateVehicleContract, UpdatingVehicle } from "@/contracts/useCases/updateVehicle";
+import { ExistsVehicle, UpdateVehicle } from "@/domain/contracts/repos/vehicle";
+import { UpdateVehicleContract, UpdatingVehicle } from "@/domain/contracts/useCases/vehicles";
 
 export class UpdateVehicleCase implements UpdateVehicleContract {
     constructor(private updateVehicle: UpdateVehicle, private existsVehicle: ExistsVehicle) { }

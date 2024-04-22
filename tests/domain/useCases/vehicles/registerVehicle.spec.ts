@@ -1,6 +1,6 @@
-import { CreateVehicle } from "@/contracts/repos/vehicle";
-import { RegisterVehicle } from "@/contracts/useCases/registerVehicle";
-import { RegisterVehicleCase } from "@/domain/useCases/registerVehicle";
+import { CreateVehicle } from "@/domain/contracts/repos/vehicle";
+import { RegisterVehicle } from "@/domain/contracts/useCases/vehicles";
+import { RegisterVehicleCase } from "@/domain/useCases/vehicles.ts/registerVehicle";
 import { MockProxy, mock } from "jest-mock-extended";
 
 describe("RegisterVehicle UseCases", () => {

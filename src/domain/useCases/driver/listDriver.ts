@@ -3,8 +3,8 @@ import { ListingDriver } from "@/domain/contracts/useCases/driver";
 
 export class ListDriverCase implements ListingDriver {
     constructor(private listdriver: ListDriver) { }
-    async execute(request: ListingDriver.Input): ListingDriver.Output {
-        return await this.listdriver.list({ ...request, limit: parseInt(request.limit), offset: parseInt(request.offset) })
+    async execute({ offset = "0", limit = "10", nome }: ListingDriver.Input): ListingDriver.Output {
+        return await this.listdriver.list({ nome, limit: parseInt(limit), offset: parseInt(offset) })
 
     }
 }

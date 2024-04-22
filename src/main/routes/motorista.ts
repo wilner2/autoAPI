@@ -45,5 +45,13 @@ export const setupDrivesRoute = (app: Express) => {
         res.status(result.statusCode).send(result)
     })
 
+
+    const listDriver = new ListDriverCase(driverRepository,)
+    const listController = new ListDriverController(listDriver)
+    router.get('/motorista', async (req, res) => {
+        const result = await listController.handle({ ...req.body, ...req.params, ...req.query })
+        res.status(result.statusCode).send(result)
+    })
+
     app.use(router)
 }

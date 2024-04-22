@@ -1,6 +1,5 @@
-import { DeleteVehicleController } from '@/app/controllers/vehicles/deleteVehicle'
-import { RecoveryVehicleController, RegisterVehicleController, UpdateVehicleController } from '@/app/controllers/'
-import { UpdateVehicleCase, DeleteVehicleCase, RecoveryVehicleCase, RegisterVehicleCase } from '@/domain/useCases/vehicles/'
+import { RecoveryVehicleController, RegisterVehicleController, UpdateVehicleController, DeleteVehicleController, ListVehiclesController } from '@/app/controllers/'
+import { UpdateVehicleCase, DeleteVehicleCase, RecoveryVehicleCase, RegisterVehicleCase, ListVehicleCase } from '@/domain/useCases/vehicles/'
 import { AppDataSource } from '@/infra/conf/datasource'
 import { VehicleRepository } from '@/infra/repositories'
 import { Router, Express } from 'express'
@@ -43,6 +42,13 @@ export const setupVehiclesRoute = (app: Express) => {
 
     router.patch('/automovel/:id', async (req, res) => {
         const result = await recoveryController.handle({ ...req.body, ...req.params })
+        res.status(result.statusCode).send(result)
+    })
+
+    const listVehicle = new ListVehicleCase(vehicleRepository,)
+    const listController = new ListVehiclesController(listVehicle)
+    router.get('/automovel', async (req, res) => {
+        const result = await listController.handle({ ...req.body, ...req.params, ...req.query })
         res.status(result.statusCode).send(result)
     })
 

@@ -1,7 +1,7 @@
 import { DriverModel } from "@/infra/entities";
 import { DriverRepository } from "@/infra/repositories";
 import { DataType, IMemoryDb, newDb } from "pg-mem";
-import { DataSource } from "typeorm";
+import { DataSource, Like } from "typeorm";
 import MockDate from 'mockdate'
 
 
@@ -146,7 +146,7 @@ describe('Create Driver repository', () => {
         await sut.list({ offset, limit, nome })
 
 
-        expect(repository).toHaveBeenCalledWith({ skip: offset, take: limit, where: { nome } })
+        expect(repository).toHaveBeenCalledWith({ skip: offset, take: limit, where: { nome: Like(`%${nome}%`) } })
         expect(repository).toHaveBeenCalledTimes(1)
     });
 

@@ -1,6 +1,7 @@
 import { DriverModel } from "@/infra/entities";
 import { CreateDriver, UpdateDriver, ExistsDriver, ListDriver } from "@/domain/contracts/repos/driver";
 import { PgRepository } from "./repository";
+import { Like } from "typeorm";
 
 
 export class DriverRepository extends PgRepository implements CreateDriver {
@@ -23,7 +24,7 @@ export class DriverRepository extends PgRepository implements CreateDriver {
 
     async list({ offset = 0, limit = 10, nome }: ListDriver.Input): ListDriver.Output {
         const repository = this.getRepository(DriverModel)
-        return await repository.find({ skip: offset, take: limit, where: { nome } })
+        return await repository.find({ skip: offset, take: limit, where: { nome: Like(`%${nome}%`) } })
 
     }
 

@@ -1,5 +1,5 @@
 import { DriverModel } from "@/infra/entities";
-import { CreateDriver, UpdateDriver, ExistsDriver } from "@/domain/contracts/repos/driver";
+import { CreateDriver, UpdateDriver, ExistsDriver, ListDriver } from "@/domain/contracts/repos/driver";
 import { PgRepository } from "./repository";
 
 
@@ -19,6 +19,12 @@ export class DriverRepository extends PgRepository implements CreateDriver {
     async exists(id: ExistsDriver.Input): ExistsDriver.Output {
         const repository = this.getRepository(DriverModel)
         return await repository.exists({ where: { id } })
+    }
+
+    async list({ offset = 0, limit = 10, nome }: ListDriver.Input): ListDriver.Output {
+        const repository = this.getRepository(DriverModel)
+        return await repository.find({ skip: offset, take: limit, where: { nome } })
+
     }
 
 } 

@@ -125,4 +125,29 @@ describe('Create Driver repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
+
+
+    ///List
+
+    test('should call getRepository in list function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+        const request = { offset: 0, limit: 10, nome: "any_nome" }
+
+        await sut.list(request)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(DriverModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+    test('should list vehicles with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(DriverModel), 'find')
+        const { offset, limit, nome } = { offset: 0, limit: 10, nome: "any_nome" }
+
+        await sut.list({ offset, limit, nome })
+
+
+        expect(repository).toHaveBeenCalledWith({ skip: offset, take: limit, where: { nome } })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
 });

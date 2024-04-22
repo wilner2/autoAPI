@@ -4,3 +4,10 @@ export interface CreateRecord {
 export namespace CreateRecord {
     export type Input = { idMotorista: number, idAutomovel: number }
 }
+
+export interface RecordInProgress {
+    findRecordInProgress(vehicle: RecordInProgress.Input): Promise<boolean>;
+}
+export namespace RecordInProgress {
+    export type Input = { idMotorista: number, idAutomovel: number }
+}

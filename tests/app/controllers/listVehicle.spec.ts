@@ -29,7 +29,7 @@ describe('ListVehicles Controller', () => {
     test("should return 200 if Vehicle delete successfully", async () => {
         stubListingVehicle.execute.mockResolvedValueOnce([{
             id: 1,
-            create_at: new Date(),
+            created_at: new Date(),
             status: true,
             placa: "any_placa",
             cor: "any_cor",
@@ -40,7 +40,7 @@ describe('ListVehicles Controller', () => {
         expect(response.statusCode).toBe(200)
         expect(response.data).toEqual([{
             id: 1,
-            create_at: new Date(),
+            created_at: new Date(),
             status: true,
             placa: "any_placa",
             cor: "any_cor",

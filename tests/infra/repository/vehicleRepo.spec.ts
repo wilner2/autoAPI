@@ -137,6 +137,28 @@ describe('Create Vehicle repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
+    ///List
+
+    test('should call getRepository in list function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+        const request = { offset: 0, limit: 10, marca: "any_marca", cor: "any_cor" }
+
+        await sut.list(request)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(VehicleModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+    test('should list vehicles with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'find')
+        const { offset, limit, marca, cor } = { offset: 0, limit: 10, marca: "any_marca", cor: "any_cor" }
+
+        await sut.list({ offset, limit, marca, cor })
+
+
+        expect(repository).toHaveBeenCalledWith({ skip: offset, take: limit, where: { marca: marca, cor: cor } })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
 
 
 });

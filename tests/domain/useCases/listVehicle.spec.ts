@@ -27,7 +27,7 @@ describe('list Vehicle UseCase', () => {
     test('should return a list of vehicles with correct params', async () => {
         stubListVehicle.list.mockResolvedValueOnce([{
             id: 1,
-            create_at: new Date(),
+            created_at: new Date(),
             status: true,
             placa: "any_placa",
             cor: "any_cor",
@@ -39,7 +39,7 @@ describe('list Vehicle UseCase', () => {
 
         expect(response).toEqual([{
             id: 1,
-            create_at: new Date(),
+            created_at: new Date(),
             status: true,
             placa: "any_placa",
             cor: "any_cor",

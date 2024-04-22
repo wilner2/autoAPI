@@ -93,6 +93,7 @@ describe('UpdateVehicle Controller', () => {
     });
 
     test("should return 200 if Vehicle updated successfully", async () => {
+        stubUpdatingVehicle.execute.mockResolvedValueOnce({ vehicleNotFounded: false })
         const request = {
             id: 1,
             cor: "any_cor",
@@ -100,7 +101,6 @@ describe('UpdateVehicle Controller', () => {
             marca: "any_marca",
             status: true
         }
-
 
         const response = await sut.handle(request);
 
@@ -121,6 +121,22 @@ describe('UpdateVehicle Controller', () => {
 
         expect(response.statusCode).toBe(500);
         expect(response.data).toEqual("Internal Error");
+    });
+
+    test('should return 404 if id of vehicle not exists on resources', async () => {
+        stubUpdatingVehicle.execute.mockResolvedValueOnce({ vehicleNotFounded: true });
+
+        const request = {
+            id: 1,
+            cor: "any_cor",
+            placa: "any_placa",
+            marca: "any_marca",
+            status: true
+        }
+        const response = await sut.handle(request);
+
+        expect(response.statusCode).toBe(404);
+        expect(response.data).toEqual("ID not founded");
     });
 
 });

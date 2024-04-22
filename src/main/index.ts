@@ -2,6 +2,7 @@ import "reflect-metadata"
 import './config/configAlias'
 import express, { json } from 'express'
 import { setupVehiclesRoute } from "./routes/vehicles"
+import { setupDrivesRoute } from "./routes/motorista"
 
 const app = express()
 app.use(json())
@@ -13,6 +14,7 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('Hello World!'))
 setupVehiclesRoute(app)
+setupDrivesRoute(app)
 
 
 

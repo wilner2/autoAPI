@@ -2,7 +2,7 @@ import { ExistsVehicle, UpdateVehicle } from "@/domain/contracts/repos/vehicle";
 import { UpdateVehicleCase } from "@/domain/useCases/vehicles/updateVehicle";
 import { mock, MockProxy } from "jest-mock-extended";
 
-describe('UpdateAuto Usecase', () => {
+describe('UpdateVehicle Usecase', () => {
     let sut: UpdateVehicleCase
     let stubUpdateVehicle: MockProxy<UpdateVehicle>
     let stubExistsVehicle: MockProxy<ExistsVehicle>
@@ -38,11 +38,11 @@ describe('UpdateAuto Usecase', () => {
             id: 1,
             status: true
         }
-        const spyAutoRepository = jest.spyOn(stubExistsVehicle, "exists")
+        const spyDriverRepository = jest.spyOn(stubExistsVehicle, "exists")
         const response = await sut.execute(request)
 
-        expect(spyAutoRepository).toHaveBeenCalledTimes(1)
-        expect(spyAutoRepository).toHaveBeenCalledWith(request.id)
+        expect(spyDriverRepository).toHaveBeenCalledTimes(1)
+        expect(spyDriverRepository).toHaveBeenCalledWith(request.id)
         expect(response).toEqual({ vehicleNotFounded: true })
     });
 

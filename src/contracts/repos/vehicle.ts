@@ -24,7 +24,7 @@ export namespace UpdateVehicle {
 
 
 export interface ExistsVehicle {
-  exists(vehicle: ExistsVehicle.Input): ExistsVehicle.Output
+  exists(id: ExistsVehicle.Input): ExistsVehicle.Output
 }
 export namespace ExistsVehicle {
   export type Input = number

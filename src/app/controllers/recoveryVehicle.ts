@@ -29,7 +29,7 @@ export class RecoveryVehicleController implements Controller {
 
     validate(request: { placa: string }) {
         const schema = Joi.object({
-            id: Joi.string().required(),
+            id: Joi.number().required(),
         })
         const validation = schema.validate(request)
         if (validation) {

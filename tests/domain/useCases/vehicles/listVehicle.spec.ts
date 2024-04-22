@@ -1,5 +1,5 @@
 import { ListVehicle } from "@/domain/contracts/repos/vehicle";
-import { ListVehicleCase } from "@/domain/useCases/vehicles.ts/listVehicle";
+import { ListVehicleCase } from "@/domain/useCases/vehicles/listVehicle";
 import { MockProxy, mock } from "jest-mock-extended";
 import MockDate from 'mockdate'
 

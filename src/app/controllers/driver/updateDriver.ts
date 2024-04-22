@@ -1,11 +1,11 @@
 import { HTTPBadRequest, HTTPInternalServerError, HTTPNotFound, HttpResponse, Ok, ParamsError, ResourceNotFound } from "@/app/helpers";
-import { UpdateDriverContract } from "@/domain/contracts/useCases/driver";
+import { UpdatingDriver } from "@/domain/contracts/useCases/driver";
 import { Controller } from "../controller";
 
 import Joi from "joi"
 
 export class UpdateDriverController implements Controller {
-    constructor(private updateDriver: UpdateDriverContract) { }
+    constructor(private updateDriver: UpdatingDriver) { }
 
     async handle(request: any): Promise<HttpResponse> {
         try {
@@ -18,7 +18,7 @@ export class UpdateDriverController implements Controller {
             if (response.driverNotFounded) {
                 return HTTPNotFound(new ResourceNotFound("ID not founded"))
             }
-            return Ok("created successfully");
+            return Ok("updated successfully");
         } catch (error) {
             return HTTPInternalServerError(error)
         }

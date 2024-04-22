@@ -10,5 +10,6 @@ export * from './driver/deleteDriver'
 export * from './driver/recoveryDriver'
 export * from './driver/listDriver'
 
+export * from './records/registerRecord'
 
 export * from './controller'

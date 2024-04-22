@@ -1,15 +1,15 @@
 import { DeleteVehicleController } from "@/app/controllers/deleteVehicle";
 import { ParamsError } from "@/app/helpers/excepetions";
 import { HTTPBadRequest } from "@/app/helpers/http";
-import { DeleteVehicle } from "@/contracts/useCases/deleteVehicle";
+import { DeletingVehicle } from "@/contracts/useCases/deleteVehicle";
 import { MockProxy, mock } from "jest-mock-extended";
 
 describe('DeleteVehicle Controller', () => {
 
     let sut: DeleteVehicleController
-    let stubDeletingVehicle: MockProxy<DeleteVehicle>
+    let stubDeletingVehicle: MockProxy<DeletingVehicle>
     beforeEach(() => {
-        stubDeletingVehicle = mock<DeleteVehicle>()
+        stubDeletingVehicle = mock<DeletingVehicle>()
         sut = new DeleteVehicleController(stubDeletingVehicle)
     })
     test('should return 400 if id is not provided', async () => {
@@ -25,6 +25,7 @@ describe('DeleteVehicle Controller', () => {
 
 
     test("should return 200 if Vehicle delete successfully", async () => {
+        stubDeletingVehicle.execute.mockResolvedValueOnce({ vehicleNotFounded: false });
         const request = { id: "1" }
 
         const response = await sut.handle(request);
@@ -40,6 +41,16 @@ describe('DeleteVehicle Controller', () => {
 
         expect(response.statusCode).toBe(500);
         expect(response.data).toEqual("Internal Error");
+    });
+
+    test('should return 404 if id of vehicle not exists on resources', async () => {
+        stubDeletingVehicle.execute.mockResolvedValueOnce({ vehicleNotFounded: true });
+
+        const request = { id: "1" }
+        const response = await sut.handle(request);
+
+        expect(response.statusCode).toBe(404);
+        expect(response.data).toEqual("ID not founded");
     });
 
 

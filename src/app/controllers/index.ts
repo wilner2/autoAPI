@@ -7,6 +7,7 @@ export * from './vehicles/updateVehicle'
 export * from './driver/registerDriver'
 export * from './driver/updateDriver'
 export * from './driver/deleteDriver'
+export * from './driver/recoveryDriver'
 
 
 export * from './controller'

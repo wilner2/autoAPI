@@ -2,7 +2,7 @@ export interface CreateRecord {
     create(vehicle: CreateRecord.Input): Promise<void>;
 }
 export namespace CreateRecord {
-    export type Input = { idMotorista: number, idAutomovel: number }
+    export type Input = { idMotorista: number, idAutomovel: number, desc: string }
 }
 
 export interface RecordInProgress {

@@ -26,6 +26,7 @@ export class RegisterRecordController implements Controller {
         const schema = Joi.object({
             idAutomovel: Joi.number().required(),
             idMotorista: Joi.number().required(),
+            desc: Joi.string().required(),
 
         })
         const validation = schema.validate(request)

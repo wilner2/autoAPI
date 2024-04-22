@@ -1,7 +1,6 @@
 
 export interface CreateDriver {
     create(vehicle: CreateDriver.Input): Promise<void>;
-
 }
 
 export namespace CreateDriver {

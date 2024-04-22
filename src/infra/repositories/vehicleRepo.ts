@@ -17,4 +17,5 @@ export class VehicleRepository extends PgRepository implements CreateVehicle, Up
 
     }
 
+
 } 

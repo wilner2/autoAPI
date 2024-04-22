@@ -79,8 +79,50 @@ describe('Create Driver repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
+    ///Update
+
+    test('should call getRepository in update function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+        const request = { nome: "any_nome", id: 1, status: true }
+
+        await sut.update(request)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(DriverModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
 
 
+    test('should update driver with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(DriverModel), 'update')
+        const { nome, status, id } = { nome: "any_nome", id: 1, status: true }
 
+        await sut.update({ nome, status, id })
+
+        expect(repository).toHaveBeenCalledWith({ id: id }, { nome, status, })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
+    ///exists
+
+    test('should call getRepository in exists function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+        const request = 1
+
+        await sut.exists(request)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(DriverModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+
+    test('should exists driver with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(DriverModel), 'exists')
+        const { id } = { id: 1 }
+
+        await sut.exists(id)
+
+        expect(repository).toHaveBeenCalledWith({ where: { id } })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
 
 });

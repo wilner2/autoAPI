@@ -31,6 +31,4 @@ describe('Update Driver Usecase', () => {
         expect(spydriverRepository).toHaveBeenCalledWith(request.id)
         expect(response).toEqual({ driverNotFounded: true })
     });
-
-
 });

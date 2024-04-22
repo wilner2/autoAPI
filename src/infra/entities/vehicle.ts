@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm"
 
 @Entity('automovel')
-export class Vehicle {
+export class VehicleModel {
     @PrimaryGeneratedColumn()
-    id!: Date
+    id!: number
 
     @Column()
     cor!: string

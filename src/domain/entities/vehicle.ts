@@ -1,3 +1,5 @@
+import { VehicleModel } from "@/infra/entities/vehicle"
+
 export class Vehicle {
   constructor(
     public placa: string,
@@ -8,14 +10,14 @@ export class Vehicle {
 
   ) { }
 
-  static create(data: {
-    placa: string,
-    cor: string,
-    marca: string,
-    id?: number,
-    status?: boolean
-  }) {
-    return new Vehicle(data.placa, data.cor, data.marca, data?.id, data?.status)
+
+  update(vehicleModel: VehicleModel): VehicleModel {
+    vehicleModel.cor = this.cor
+    vehicleModel.marca = this.marca
+    vehicleModel.placa = this.placa
+    vehicleModel.status = this.status || vehicleModel.status
+
+    return vehicleModel
   }
 }
 

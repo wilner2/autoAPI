@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { RecordModel } from "./record"
 
 @Entity('automovel')
 export class VehicleModel {
@@ -19,5 +20,8 @@ export class VehicleModel {
 
     @Column({ nullable: false })
     status!: boolean
+
+    @OneToMany(() => RecordModel, record => record.automovel, { cascade: true })
+    registro!: RecordModel[]
 
 }

@@ -22,7 +22,7 @@ export class VehicleRepository extends PgRepository implements CreateVehicle, Up
         return await repository.exists({ where: { id } })
     }
 
-    async list({ offset = 0, limit = 10, marca, cor }: ListVehicle.Input): ListVehicle.Output {
+    async list({ offset, limit, marca, cor }: ListVehicle.Input): ListVehicle.Output {
         const repository = this.getRepository(VehicleModel)
         return await repository.find({ skip: offset, take: limit, where: { marca: marca, cor: cor } })
 

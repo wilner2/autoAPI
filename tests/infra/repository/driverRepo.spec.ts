@@ -150,6 +150,17 @@ describe('Create Driver repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
+    test('should list vehicles with correct params if nome is not provided', async () => {
+        const repository = jest.spyOn(sut.getRepository(DriverModel), 'find')
+        const { offset, limit, nome } = { offset: 0, limit: 10, nome: undefined }
+
+        await sut.list({ offset, limit, nome })
+
+
+        expect(repository).toHaveBeenCalledWith({ skip: offset, take: limit, where: { nome: undefined } })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
     //////findbyId
     test('should call getRepository in findById function', async () => {
         const getRepositorySpy = jest.spyOn(sut, 'getRepository')

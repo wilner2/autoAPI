@@ -22,9 +22,10 @@ export class DriverRepository extends PgRepository implements CreateDriver, List
         return await repository.exists({ where: { id } })
     }
 
-    async list({ offset = 0, limit = 10, nome }: ListDriver.Input): ListDriver.Output {
+    async list({ offset, limit, nome
+    }: ListDriver.Input): ListDriver.Output {
         const repository = this.getRepository(DriverModel)
-        return await repository.find({ skip: offset, take: limit, where: { nome: Like(`%${nome}%`) } })
+        return await repository.find({ skip: offset, take: limit, where: { nome: nome ? Like(`%${nome}%`) : undefined } })
 
     }
 

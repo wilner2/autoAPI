@@ -48,6 +48,24 @@ describe('ListVehicles Controller', () => {
         }])
 
     });
+    test("should return 400 if a fields is not provided corretly", async () => {
+        jest.spyOn(sut, 'validate').mockReturnValueOnce('any_message')
+        const response = await sut.handle(request);
+
+        expect(response.statusCode).toBe(400);
+        expect(response.data).toEqual('any_message');
+    });
+    test("should return undefined on validate fields", async () => {
+        const response = sut.validate(request);
+
+        expect(response).toEqual(undefined);
+    });
+
+    test("should return a message on validate fields  ", async () => {
+        const response = sut.validate(2123);
+
+        expect(response).toEqual("\"value\" must be of type object");
+    });
 
     test("should return 500 if an internal error occurs", async () => {
         stubListingVehicle.execute.mockRejectedValueOnce(new Error("Internal Error"));

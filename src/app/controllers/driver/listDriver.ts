@@ -25,10 +25,8 @@ export class ListDriverController implements Controller {
             offset: Joi.string(),
             limit: Joi.string(),
         })
-        const validation = schema.validate(request)
-        if (validation) {
-            return validation.error?.message
-        }
+        return schema.validate(request).error?.message
+
 
     }
 }

@@ -8,8 +8,7 @@ describe('list Vehicle UseCase', () => {
     let sut: ListVehicleCase
     let stubListVehicle: MockProxy<ListVehicle>
     const request = {
-        offset: "1",
-        limit: "10",
+
         marca: "any_marca",
         cor: "any_cor"
     }
@@ -45,7 +44,8 @@ describe('list Vehicle UseCase', () => {
             cor: "any_cor",
             marca: "any_marca",
         }])
-        expect(SpyListVehicles).toHaveBeenCalledWith({ ...request, limit: parseInt(request.limit), offset: parseInt(request.offset) })
+        expect(SpyListVehicles).toHaveBeenCalledWith({ ...request, limit: 10, offset: 0 })
+
         expect(SpyListVehicles).toHaveBeenCalledTimes(1)
 
     });

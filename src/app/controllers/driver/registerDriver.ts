@@ -1,32 +1,32 @@
-import { RegisterVehicle } from "@/domain/contracts/useCases/vehicles";
+import { RegisterDriver } from "@/domain/contracts/useCases/driver";
 import { HTTPBadRequest, HTTPInternalServerError, Ok, ParamsError } from "@/app/helpers";
-import Joi from "joi";
 import { Controller } from "../controller";
 
-export class RegisterVehicleController implements Controller {
-    constructor(private registerVehicle: RegisterVehicle) { }
-    async handle(request: any) {
-        try {
-            const validation = this.validate(request)
-            if (validation) {
-                return HTTPBadRequest(new ParamsError(validation));
-            }
-            await this.registerVehicle.execute(request);
-            return Ok("created successfully");
-        } catch (error) {
-            return HTTPInternalServerError(error);
-        }
-    }
+import Joi from "joi";
 
-    validate(request: { placa: string }) {
-        const schema = Joi.object({
-            placa: Joi.string().required(),
-            marca: Joi.string().required(),
-            cor: Joi.string().required(),
-        })
-        const validation = schema.validate(request)
-        if (validation) {
-            return validation.error?.message
-        }
+export class RegisterDriverController implements Controller {
+  constructor(private registerDriver: RegisterDriver) { }
+  async handle(request: any) {
+    try {
+      const validation = this.validate(request)
+      if (validation) {
+        return HTTPBadRequest(new ParamsError(validation));
+      }
+      await this.registerDriver.execute(request);
+      return Ok("created successfully");
+    } catch (error) {
+      return HTTPInternalServerError(error);
     }
+  }
+
+  validate(request: any): string | undefined {
+    const schema = Joi.object({
+      nome: Joi.string().required(),
+
+    })
+    const validation = schema.validate(request)
+    if (validation) {
+      return validation.error?.message
+    }
+  }
 }

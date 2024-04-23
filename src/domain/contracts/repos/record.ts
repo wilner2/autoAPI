@@ -1,10 +1,11 @@
-import { RecordModel } from "@/infra/entities";
-
 export interface CreateRecord {
-    create(record: CreateRecord.Input): Promise<void>;
+    create(register: CreateRecord.Register, driver: CreateRecord.Driver, vehicle: CreateRecord.Vehicle): Promise<void>;
 }
 export namespace CreateRecord {
-    export type Input = { idMotorista: number, idAutomovel: number, desc: string }
+    export type Register = { idMotorista: number, idAutomovel: number, desc: string }
+    export type Vehicle = { id: number, created_at: Date, status: boolean, placa: string, cor: string, marca: string }
+    export type Driver = { id: number, created_at: Date, status: boolean, nome: string }
+
 }
 
 export interface RecordInProgress {

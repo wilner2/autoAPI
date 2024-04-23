@@ -185,6 +185,8 @@ describe('Create Record repository', () => {
             },
             where: {
                 desc,
+                inicio: new Date(),
+                fim: new Date(),
                 motorista: { nome: motorista },
                 automovel: { placa, cor, marca }
             }
@@ -193,5 +195,37 @@ describe('Create Record repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
+
+
+    test('should list record with correct params if fim and inico not provided', async () => {
+        const repository = jest.spyOn(sut.getRepository(RecordModel), 'find')
+        const { offset, limit, marca, cor, desc, motorista, placa } =
+        {
+            offset: 1,
+            limit: 10,
+            motorista: "any_motorista",
+            placa: "any_placa",
+            desc: "any_desc",
+            cor: "any_cor",
+            marca: "any_marca"
+        }
+        await sut.list({ offset, limit, marca, cor, desc, motorista, placa })
+
+
+        expect(repository).toHaveBeenCalledWith({
+            skip: offset, take: limit,
+            relations: {
+                motorista: true,
+                automovel: true
+            },
+            where: {
+                desc,
+                motorista: { nome: motorista },
+                automovel: { placa, cor, marca }
+            }
+
+        })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
 
 });

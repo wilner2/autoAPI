@@ -13,8 +13,12 @@ export class RegisterRecordController implements Controller {
                 return HTTPBadRequest(new ParamsError(validation));
             }
             const result = await this.registerRecord.execute(request);
+
+            if (result.driverNotFound || result.vehicleNotFound) {
+                return HTTPConflict(new RecordInProgress("Vehicle or Driver not exists"))
+            }
             if (result.recordInProgress) {
-                return HTTPConflict(new RecordInProgress("Vehicle or Driver with record in progress"))
+                return HTTPConflict(new RecordInProgress("Record in progress"))
             }
             return Ok("created successfully");
         } catch (error) {

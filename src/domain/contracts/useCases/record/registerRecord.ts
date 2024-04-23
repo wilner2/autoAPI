@@ -4,5 +4,9 @@ export interface RegisterRecord {
 }
 export namespace RegisterRecord {
     export type Input = { idAutomovel: number, idMotorista: number, desc: string }
-    export type Output = Promise<{ recordInProgress: boolean }>
+    export type Output = Promise<{
+        recordInProgress?: boolean | undefined,
+        vehicleNotFound?: boolean | undefined
+        driverNotFound?: boolean | undefined
+    }>
 }

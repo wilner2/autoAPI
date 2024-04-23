@@ -1,10 +1,9 @@
 import { CreateRecord, RecordInProgress } from "@/domain/contracts/repos/record";
-import { RegisterRecord } from "@/domain/contracts/useCases/record";
 import { RegisterRecordCase } from "@/domain/useCases/record";
 import { MockProxy, mock } from "jest-mock-extended";
 
 describe("RegisterRecord UseCases", () => {
-    let sut: RegisterRecord;
+    let sut: RegisterRecordCase;
     let stubCreateRecordORM: MockProxy<CreateRecord>;
     let stubRecordInProgress: MockProxy<RecordInProgress>;
     const request = { idMotorista: 1, idAutomovel: 1, desc: "any_desc" }

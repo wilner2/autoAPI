@@ -1,5 +1,5 @@
-import { RecoveryVehicleController, RegisterVehicleController, UpdateVehicleController, DeleteVehicleController, ListVehiclesController } from '@/app/controllers/'
-import { UpdateVehicleCase, DeleteVehicleCase, RecoveryVehicleCase, RegisterVehicleCase, ListVehicleCase } from '@/domain/useCases/vehicles/'
+import { RecoveryVehicleController, RegisterVehicleController, UpdateVehicleController, DeleteVehicleController, ListVehiclesController } from '@/app/controllers'
+import { UpdateVehicleCase, DeleteVehicleCase, RecoveryVehicleCase, RegisterVehicleCase, ListVehicleCase } from '@/domain/useCases/vehicles'
 import { AppDataSource } from '@/infra/conf/datasource'
 import { VehicleRepository } from '@/infra/repositories'
 import { Router, Express } from 'express'

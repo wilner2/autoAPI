@@ -62,12 +62,21 @@ describe("RegisterRecord Controller", () => {
     });
 
     test("should return 409 if record be in progress", async () => {
-        stubRegisterRecord.execute.mockResolvedValueOnce({ recordInProgress: true })
+        stubRegisterRecord.execute.mockResolvedValueOnce({ recordInProgress: true, driverNotFound: false, vehicleNotFound: false })
         const request = { idAutomovel: 1, idMotorista: 1, desc: "any_desc" };
 
         const response = await sut.handle(request);
 
         expect(response.statusCode).toBe(409);
-        expect(response.data).toEqual("Vehicle or Driver with record in progress");
+        expect(response.data).toEqual("Record in progress");
+    });
+    test("should return 409 if record Vehicle or Driver not exists in database", async () => {
+        stubRegisterRecord.execute.mockResolvedValueOnce({ recordInProgress: false, driverNotFound: true, vehicleNotFound: false })
+        const request = { idAutomovel: 1, idMotorista: 1, desc: "any_desc" };
+
+        const response = await sut.handle(request);
+
+        expect(response.statusCode).toBe(409);
+        expect(response.data).toEqual("Vehicle or Driver not exists");
     });
 });

@@ -1,4 +1,4 @@
-import { DriverModel } from "@/infra/entities";
+import { DriverModel, RecordModel, VehicleModel } from "@/infra/entities";
 import { DriverRepository } from "@/infra/repositories";
 import { DataType, IMemoryDb, newDb } from "pg-mem";
 import { DataSource, Like } from "typeorm";
@@ -54,7 +54,7 @@ describe('Create Driver repository', () => {
         dataSource = db.adapters.createTypeormDataSource({
             type: 'postgres',
             port: 6566,
-            entities: [DriverModel],
+            entities: [DriverModel, RecordModel, VehicleModel],
             logging: false,
         })
         await dataSource.initialize()
@@ -150,4 +150,23 @@ describe('Create Driver repository', () => {
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
+    //////findbyId
+    test('should call getRepository in findById function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+
+        await sut.findById(1)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(DriverModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+    test('should find driver with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(DriverModel), 'findOneBy')
+
+        await sut.findById(1)
+
+
+        expect(repository).toHaveBeenCalledWith({ id: 1 })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
 });

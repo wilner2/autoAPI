@@ -8,8 +8,6 @@ describe('list Driver UseCase', () => {
     let sut: ListDriverCase
     let stubListDriver: MockProxy<ListDriver>
     const request = {
-        offset: "1",
-        limit: "10",
         nome: "any_nome",
     }
 
@@ -40,7 +38,7 @@ describe('list Driver UseCase', () => {
             status: true,
             nome: "any_nome",
         }])
-        expect(SpyListDrivers).toHaveBeenCalledWith({ ...request, limit: parseInt(request.limit), offset: parseInt(request.offset) })
+        expect(SpyListDrivers).toHaveBeenCalledWith({ ...request, limit: 10, offset: 0 })
         expect(SpyListDrivers).toHaveBeenCalledTimes(1)
 
     });

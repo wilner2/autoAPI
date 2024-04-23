@@ -24,7 +24,7 @@ Este projeto visa desenvolver uma WebAPI para controlar a utilização dos autom
 #### linguagem 
 Utilizado o node na versão 20.12.2 junto com o typescript.
 ### banco de dados
-utilizado o postgress como banco relacional com o TypeORM.
+utilizado o postgress como banco relacional junto com o TypeORM.
 ### testes
 utilizado o jest para cobrir 100% código.
 ### documentação

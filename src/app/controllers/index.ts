@@ -11,5 +11,6 @@ export * from './driver/recoveryDriver'
 export * from './driver/listDriver'
 
 export * from './records/registerRecord'
+export * from './records/finishRecord'
 
 export * from './controller'

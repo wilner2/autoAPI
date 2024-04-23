@@ -14,18 +14,120 @@
   "paths": {
     "/motorista": {
       "post": {
-        "description": "",
+        "summary": "cadastra motorista",
+        "description": "Cadastra um motoristas",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "motorista registrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "default": "created successfully"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "default": 200
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Campos obrigatórios não enviado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "default": 400
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "get": {
-        "description": "",
+        "description": "Lista motoristas",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nome",
+            "description": "Nome do motorista para a consulta"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "limite da consulta para paginação"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "offset da consulta para paginação"
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "motorista registrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "default": 200
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "nome": {
+                            "type": "string"
+                          },
+                          "created_at": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -89,9 +191,10 @@
     "/automovel": {
       "post": {
         "description": "",
+        "parameters": [],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "ssss"
           }
         }
       },

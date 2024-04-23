@@ -1,17 +1,17 @@
 import { ListRecordController, FinishRecordController, RegisterRecordController } from '@/app/controllers'
 import { ListRecordCase, RegisterRecordCase, finishRecordCase } from '@/domain/useCases/record'
 import { AppDataSource } from '@/infra/conf/datasource'
-import { RecordRepository } from '@/infra/repositories'
+import { RecordRepository, VehicleRepository, DriverRepository } from '@/infra/repositories'
 import { Router, Express } from 'express'
 
 export const setupRecordsRoute = (app: Express) => {
     const router = Router()
 
     const recordRepository = new RecordRepository(AppDataSource)
-    const registerRecord = new RegisterRecordCase(recordRepository, recordRepository)
+    const vehicleRepository = new VehicleRepository(AppDataSource)
+    const driverRepository = new DriverRepository(AppDataSource)
+    const registerRecord = new RegisterRecordCase(recordRepository, recordRepository, vehicleRepository, driverRepository)
     const registerController = new RegisterRecordController(registerRecord)
-
-
 
     router.post('/registro', async (req, res) => {
         const result = await registerController.handle(req.body)

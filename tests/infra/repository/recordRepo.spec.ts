@@ -8,6 +8,20 @@ describe('Create Record repository', () => {
     let db: IMemoryDb
     let sut: RecordRepository
     const request = { idAutomovel: 1, idMotorista: 1, desc: "any_desc" };
+    const vehicle = {
+        id: 1,
+        created_at: new Date(),
+        status: true,
+        placa: "any_placa",
+        cor: "any_cor",
+        marca: "any_marca",
+    }
+    const driver = {
+        id: 1,
+        created_at: new Date(),
+        status: true,
+        nome: "any_nome",
+    }
 
     afterAll(() => {
         MockDate.reset()
@@ -53,8 +67,9 @@ describe('Create Record repository', () => {
         dataSource = db.adapters.createTypeormDataSource({
             type: 'postgres',
             port: 6566,
-            entities: [RecordModel, DriverModel, VehicleModel],
+            entities: [DriverModel, VehicleModel, RecordModel],
             logging: false,
+
         })
         await dataSource.initialize()
         await dataSource.synchronize()
@@ -63,17 +78,17 @@ describe('Create Record repository', () => {
 
     test('should call getRepository', async () => {
         const getRepositorySpy = jest.spyOn(sut, 'getRepository')
-        await sut.create(request)
+        await sut.create(request, driver, vehicle)
 
-        expect(getRepositorySpy).toHaveBeenCalledWith(RecordModel)
-        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(3)
     });
 
     test('should save Record in database', async () => {
         const repository = jest.spyOn(sut.getRepository(RecordModel), 'save')
-        await sut.create(request)
 
-        expect(repository).toHaveBeenCalledWith({ ...request, inicio: new Date().toISOString(), fim: null, inProgress: true, id: 2 })
+        await sut.create(request, driver, vehicle)
+
+        expect(repository).toHaveBeenCalledWith({ "desc": "any_desc", "fim": null, "id": 2, "inProgress": true, "inicio": new Date() })
         expect(repository).toHaveBeenCalledTimes(1)
     });
 
@@ -164,6 +179,10 @@ describe('Create Record repository', () => {
 
         expect(repository).toHaveBeenCalledWith({
             skip: offset, take: limit,
+            relations: {
+                motorista: true,
+                automovel: true
+            },
             where: {
                 desc,
                 motorista: { nome: motorista },

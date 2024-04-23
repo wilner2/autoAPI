@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm"
 import { VehicleModel } from "./vehicle"
 import { DriverModel } from "./driver"
 
@@ -19,11 +19,11 @@ export class RecordModel {
     @Column({ nullable: false })
     inProgress!: boolean
 
-    @OneToOne(() => DriverModel)
+    @ManyToOne(() => DriverModel, driver => driver.registro)
     @JoinColumn()
     motorista!: DriverModel
 
-    @OneToOne(() => VehicleModel)
+    @ManyToOne(() => VehicleModel, veiculo => veiculo.registro)
     @JoinColumn()
     automovel!: VehicleModel
 }

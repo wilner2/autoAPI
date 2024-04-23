@@ -34,5 +34,14 @@ export interface ListVehicle {
 
 export namespace ListVehicle {
   export type Input = { marca?: string, cor?: string, limit: number, offset: number }
-  export type Output = Promise<Array<{ id: number, created_at: Date, status: Boolean, placa: string, cor: string, marca: string }>>
+  export type Output = Promise<Array<{ id: number, created_at: Date, status: boolean, placa: string, cor: string, marca: string }>>
+}
+
+export interface FindByID {
+  findById(id: FindByID.Input): FindByID.Output
+}
+
+export namespace FindByID {
+  export type Input = number
+  export type Output = Promise<{ id: number, created_at: Date, status: boolean, placa: string, cor: string, marca: string } | null>
 }

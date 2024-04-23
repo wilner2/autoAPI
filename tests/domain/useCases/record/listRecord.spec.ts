@@ -31,11 +31,9 @@ describe('list Record UseCase', () => {
     test('should return a list of records with correct params', async () => {
         stubListRecord.list.mockResolvedValueOnce([{
             id: 1,
-            marca: "any_marca",
-            placa: "any_placa",
-            cor: "any_cor",
-            motorista: "any_motorista",
-            status: true,
+            automovel: { marca: "any_marca", placa: "any_placa", cor: "any_cor", created_at: new Date(), id: 1, status: true },
+            motorista: { nome: "any_motorista", id: 1, created_at: new Date(), status: true },
+            inProgress: true,
             inicio: new Date(),
             fim: new Date(),
             desc: "any_desc"
@@ -46,11 +44,9 @@ describe('list Record UseCase', () => {
 
         expect(response).toEqual([{
             id: 1,
-            marca: "any_marca",
-            placa: "any_placa",
-            cor: "any_cor",
-            motorista: "any_motorista",
-            status: true,
+            automovel: { marca: "any_marca", placa: "any_placa", cor: "any_cor", created_at: new Date(), id: 1, status: true },
+            motorista: { nome: "any_motorista", id: 1, created_at: new Date(), status: true },
+            inProgress: true,
             inicio: new Date(),
             fim: new Date(),
             desc: "any_desc"

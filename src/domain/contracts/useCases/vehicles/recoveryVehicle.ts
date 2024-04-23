@@ -4,5 +4,5 @@ export interface RecoveringVehicle {
 }
 export namespace RecoveringVehicle {
     export type Input = { id: string }
-    export type Output = Promise<{ vehicleNotFounded: Boolean }>
+    export type Output = Promise<{ vehicleNotFounded: boolean }>
 }

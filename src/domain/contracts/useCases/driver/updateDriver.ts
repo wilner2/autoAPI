@@ -3,6 +3,6 @@ export interface UpdatingDriver {
 }
 export namespace UpdatingDriver {
     export type Input = { id: number, nome: string, status: boolean }
-    export type Output = Promise<{ driverNotFounded: Boolean }>
+    export type Output = Promise<{ driverNotFounded: boolean }>
 
 }

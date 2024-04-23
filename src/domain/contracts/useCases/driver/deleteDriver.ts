@@ -4,5 +4,5 @@ export interface DeletingDriver {
 }
 export namespace DeletingDriver {
     export type Input = { id: string }
-    export type Output = Promise<{ driverNotFounded: Boolean }>
+    export type Output = Promise<{ driverNotFounded: boolean }>
 }

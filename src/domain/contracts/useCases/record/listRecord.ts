@@ -13,16 +13,16 @@ export namespace ListingRecord {
         cor?: string,
         marca?: string
     }
-    export type Output = Promise<Array<{
+    export type Output = Promise<{
         id: number,
-        marca: string,
-        placa: string,
-        cor: string,
-        motorista: string,
-        status: boolean,
+        automovel: { marca: string, placa: string, cor: string, created_at: Date, id: number, status: boolean },
+        motorista: { nome: string, id: number, created_at: Date, status: boolean },
+        inProgress: boolean,
         inicio: Date,
         fim: Date,
         desc: string
-    }>>
+    }[]>
+
+
 
 }

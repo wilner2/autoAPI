@@ -1,15 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm"
+import { VehicleModel } from "./vehicle"
+import { DriverModel } from "./driver"
 
 @Entity('registro')
 export class RecordModel {
     @PrimaryGeneratedColumn()
     id!: number
-
-    @Column({ nullable: false })
-    idAutomovel!: number
-
-    @Column({ nullable: false })
-    idMotorista!: number
 
     @Column({ nullable: false })
     desc!: string
@@ -23,4 +19,11 @@ export class RecordModel {
     @Column({ nullable: false })
     inProgress!: boolean
 
+    @OneToOne(() => DriverModel)
+    @JoinColumn()
+    motorista!: DriverModel
+
+    @OneToOne(() => VehicleModel)
+    @JoinColumn()
+    automovel!: VehicleModel
 }

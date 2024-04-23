@@ -30,3 +30,12 @@ export namespace ListDriver {
     export type Input = { nome?: string, limit: number, offset: number }
     export type Output = Promise<Array<{ id: number, created_at: Date, status: Boolean, nome: string }>>
 }
+
+export interface FindByID {
+    findById(id: FindByID.Input): FindByID.Output
+}
+
+export namespace FindByID {
+    export type Input = number
+    export type Output = Promise<{ id: number, created_at: Date, status: Boolean, nome: string } | null>
+}

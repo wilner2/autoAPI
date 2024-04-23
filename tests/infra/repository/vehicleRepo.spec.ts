@@ -1,4 +1,4 @@
-import { VehicleModel } from "@/infra/entities";
+import { DriverModel, RecordModel, VehicleModel } from "@/infra/entities";
 import { VehicleRepository } from "@/infra/repositories";
 import { DataType, IMemoryDb, newDb } from "pg-mem";
 import { DataSource } from "typeorm";
@@ -58,7 +58,7 @@ describe('Create Vehicle repository', () => {
         dataSource = db.adapters.createTypeormDataSource({
             type: 'postgres',
             port: 6566,
-            entities: [VehicleModel],
+            entities: [DriverModel, RecordModel, VehicleModel],
             logging: false,
         })
         await dataSource.initialize()
@@ -157,6 +157,28 @@ describe('Create Vehicle repository', () => {
 
 
         expect(repository).toHaveBeenCalledWith({ skip: offset, take: limit, where: { marca: marca, cor: cor } })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
+
+    /// findById
+
+    test('should call getRepository in findById function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+
+        await sut.findById(1)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(VehicleModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+    test('should find vehicles with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(VehicleModel), 'findOneBy')
+
+        await sut.findById(1)
+
+
+        expect(repository).toHaveBeenCalledWith({ id: 1 })
         expect(repository).toHaveBeenCalledTimes(1)
     });
 

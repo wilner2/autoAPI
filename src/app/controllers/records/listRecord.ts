@@ -23,8 +23,8 @@ export class ListRecordController implements Controller {
         const schema = Joi.object({
             offset: Joi.string(),
             limit: Joi.string(),
-            inicio: Joi.string(),
-            fim: Joi.string(),
+            inicio: Joi.date(),
+            fim: Joi.date(),
             motorista: Joi.string(),
             placa: Joi.string(),
             desc: Joi.string(),

@@ -55,8 +55,11 @@ export class RecordRepository extends PgRepository implements CreateRecord, Reco
             },
             where: {
                 desc,
+                inicio: inicio ? new Date(inicio) : undefined,
+                fim: fim ? new Date(fim) : undefined,
                 motorista: { nome: motorista },
-                automovel: { placa, cor, marca }
+                automovel: { placa, cor, marca },
+
             }
 
         })

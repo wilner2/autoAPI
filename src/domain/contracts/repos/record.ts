@@ -18,7 +18,7 @@ export interface FinishRecord {
     update(id: FinishRecord.Input): Promise<void>;
 }
 export namespace FinishRecord {
-    export type Input = { id: number, inProgress: boolean }
+    export type Input = { id: number, inProgress: boolean, fim: Date }
 }
 
 export interface ListRecord {

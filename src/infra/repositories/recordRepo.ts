@@ -15,9 +15,9 @@ export class RecordRepository extends PgRepository implements CreateRecord, Reco
         return await repository.exists({ where: [{ inProgress: true, automovel: { id: idAutomovel } }, { inProgress: true, motorista: { id: idMotorista } }] })
     }
 
-    async update({ id, inProgress }: FinishRecord.Input): Promise<void> {
+    async update({ id, inProgress, fim }: FinishRecord.Input): Promise<void> {
         const repository = this.getRepository(RecordModel)
-        await repository.update({ id: id }, { inProgress })
+        await repository.update({ id: id }, { inProgress, fim: fim.toISOString() })
     }
 
     async list({ offset, limit, inicio, fim, motorista, placa, desc, cor, marca }: ListRecord.Input): Promise<RecordModel[]> {

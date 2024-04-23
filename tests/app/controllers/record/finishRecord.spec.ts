@@ -23,13 +23,13 @@ describe('Finish Record Controller', () => {
     });
 
 
-    test("should return 200 if Drier recovery with successfully", async () => {
+    test("should return 200 if Record finished with successfully", async () => {
         const request = { id: "1" }
 
         const response = await sut.handle(request);
 
         expect(response.statusCode).toBe(200);
-        expect(response.data).toEqual("recovery successfully");
+        expect(response.data).toEqual("records finished with successfully");
     });
 
     test("should return 500 if an internal error occurs", async () => {

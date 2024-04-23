@@ -12,7 +12,7 @@ export class FinishRecordController implements Controller {
                 return HTTPBadRequest(new ParamsError(validation));
             }
             await this.finishRecord.execute(request)
-            return Ok("recovery successfully");
+            return Ok("records finished with successfully");
         } catch (error) {
             return HTTPInternalServerError(error);
         }

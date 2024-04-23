@@ -100,4 +100,26 @@ describe('Create Record repository', () => {
         expect(response).toEqual(true)
     });
 
+    /// update
+
+    test('should call getRepository in update function', async () => {
+        const getRepositorySpy = jest.spyOn(sut, 'getRepository')
+        const request = { id: 1, inProgress: false }
+
+        await sut.update(request)
+
+        expect(getRepositorySpy).toHaveBeenCalledWith(RecordModel)
+        expect(getRepositorySpy).toHaveBeenCalledTimes(1)
+    });
+
+
+    test('should update record with correct params', async () => {
+        const repository = jest.spyOn(sut.getRepository(RecordModel), 'update')
+        const { id, inProgress } = { id: 1, inProgress: false }
+        await sut.update({ id, inProgress })
+
+        expect(repository).toHaveBeenCalledWith({ id: id }, { inProgress })
+        expect(repository).toHaveBeenCalledTimes(1)
+    });
+
 });

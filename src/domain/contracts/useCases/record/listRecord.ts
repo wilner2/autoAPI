@@ -3,8 +3,8 @@ export interface ListingRecord {
 }
 export namespace ListingRecord {
     export type Input = {
-        offset: string,
-        limit: string,
+        offset?: string,
+        limit?: string,
         inicio?: string,
         fim?: string,
         motorista?: string,

@@ -18,3 +18,32 @@ export interface FinishRecord {
 export namespace FinishRecord {
     export type Input = { id: number, inProgress: boolean }
 }
+
+export interface ListRecord {
+    list(data: ListRecord.Input): ListRecord.Output
+}
+
+export namespace ListRecord {
+    export type Input = {
+        offset: number,
+        limit: number,
+        inicio?: string,
+        fim?: string,
+        motorista?: string,
+        placa?: string,
+        desc?: string,
+        cor?: string,
+        marca?: string
+    }
+    export type Output = Promise<Array<{
+        id: number,
+        marca: string,
+        placa: string,
+        cor: string,
+        motorista: string,
+        status: boolean,
+        inicio: Date,
+        fim: Date,
+        desc: string
+    }>>
+}

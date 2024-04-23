@@ -3,7 +3,7 @@ import { ParamsError, HTTPBadRequest } from "@/app/helpers/";
 import { RecoveringDriver } from "@/domain/contracts/useCases/driver";
 import { MockProxy, mock } from "jest-mock-extended";
 
-describe('RecoveryDrier Controller', () => {
+describe('RecoveryDriver Controller', () => {
 
     let sut: RecoveryDriverController
     let stubRecoveringDriver: MockProxy<RecoveringDriver>
@@ -23,7 +23,7 @@ describe('RecoveryDrier Controller', () => {
     });
 
 
-    test("should return 200 if Drier recovery with successfully", async () => {
+    test("should return 200 if Driver recovery with successfully", async () => {
         stubRecoveringDriver.execute.mockResolvedValueOnce({ driverNotFounded: false });
         const request = { id: "1" }
 
